@@ -3,6 +3,7 @@ import { links } from "../../assets/images-links";
 import "./styles.css";
 
 function Filter({ selectedFilter, setSelectedFilter }) {
+    
 return (
     <div className="filter-div">
     {links.map((item, i) => (
