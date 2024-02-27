@@ -7,6 +7,7 @@ function Filter({ selectedFilter, setSelectedFilter }) {
 return (
     <div className="filter-div">
     {links.map((item, i) => (
+        
         <div
         key={i}
         className={`links-box ${i == selectedFilter && "selected-box"}`}
