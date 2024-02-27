@@ -1,3 +1,7 @@
+p{
+    text-align: left;
+}
+
 .cards-flex {
     display: flex;
     justify-content: center;

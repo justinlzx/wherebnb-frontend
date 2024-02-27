@@ -21,7 +21,7 @@ function Header() {
                 <LanguageRoundedIcon sx={{ fontSize: "1.5rem"}}/>
             </div>
             <div className="profile-div">
-                {/* <BasicMenu/> */}
+                <BasicMenu/>
             </div>
         </div>
     </div>
