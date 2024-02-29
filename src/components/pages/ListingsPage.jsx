@@ -3,7 +3,6 @@ import Cards from '../Cards';
 import Filter from '../Filter/Filter';
 import { list, list2 } from "../../assets/cards-list";
 
-
 export const ListingsPage = () => {
 
     const [selectedFilter, setSelectedFilter] = useState(0);
