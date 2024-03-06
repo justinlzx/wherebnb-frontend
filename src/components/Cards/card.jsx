@@ -41,7 +41,7 @@ return (
     </p>  */}
     <img src={hotel} className="card-img"  style={{ height: '270px', width: '270px', borderRadius:'0.5rem' }}/>
     <div className="card-info-flex">
-        <h3 className="card-title">Place</h3>
+        <h3 className="card-title ">Place</h3>
         <div className="card-rating">
         <StarRateRoundedIcon />
         <p>4.56</p>
