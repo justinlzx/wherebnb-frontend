@@ -11,7 +11,7 @@ export const InfoCard = ({ listing }) => {
 
   return (
     <Link to={`/listings/${id}`}>
-      <div className="mx-auto overflow-hidden rounded-lg hover:transform hover:scale-[1.03] cursor-pointer hover:bg-black">
+      <div className="mx-auto overflow-hidden rounded-lg hover:transform hover:scale-[1.03] cursor-pointer">
         <img
               src={image}
               className="w-68 h-70 rounded-lg object-cover transition-transform duration-300 hover:scale-100"
