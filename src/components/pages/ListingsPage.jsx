@@ -1,7 +1,9 @@
-import { useState } from 'react';
+import { useCallback, useState, useEffect } from 'react';
 import listingsData from "../../listingsData";
 import { InfoCard } from "../Cards/InfoCard";
-import { countries } from '../../constants/countries'
+import { countries } from '../../constants/countries';
+import axios from 'axios';
+
 
 
 export const ListingsPage = () => {
@@ -12,6 +14,20 @@ export const ListingsPage = () => {
     country: "",
     numRooms: 0
   })
+
+  const [listings, setListings] = useState()
+
+  // const getListings = useCallback( async () => {
+  //   await axios.get(`${process.env.REACT_APP_ACCOMS_URL}/accoms`)
+  //     .then((res) => {
+  //       console.log(res)
+  //       setListings(res.data)
+  //     })
+  // })
+
+  // useEffect(() => {
+  //   getListings()
+  // }, [filters])
 
   return (
     <div className="m-6">
