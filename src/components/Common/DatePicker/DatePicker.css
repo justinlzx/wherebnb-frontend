@@ -45,9 +45,9 @@ button.react-calendar__tile:active {
   background-color: #eec3af;
 }
 
-.selected {
+/* .selected {
   background-color: #adc7de;
-}
+} */
 
 abbr {
   text-decoration: none;

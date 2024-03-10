@@ -3,12 +3,14 @@ import { useEffect } from 'react';
 import axios from 'axios'
 import { useState } from 'react';
 import { DatePicker } from '../Common/DatePicker/DatePicker'
+import { toast } from 'react-toastify';
 
 export const IndividualListingsPage = () => {
 
     // const { id } = useParams()
     const id = 9
-    const url = process.env.REACT_APP_ACCOMS_URL
+    const accomsUrl = process.env.REACT_APP_ACCOMS_URL
+    const bookingUrl = process.env.REACT_APP_BOOKINGS_URL
     const [listing, setListing] = useState({
 
     })
@@ -24,10 +26,25 @@ export const IndividualListingsPage = () => {
         }
     }
 
+    const createBooking = () => {
+        axios.post(`${bookingUrl}/booking`, {
+            listingId: id,
+            guestId: 1,
+            startDate: dates.startDate,
+            endDate: dates.endDate
+        })
+        .then(() => {
+            toast.success('Booking created successfully')
+        })
+        .catch((err) => {
+            toast.error('Error creating booking:', err)
+        })
+    };
+
 
     // TODO: use this useEffect when backend is ready 
     useEffect(() => {
-        axios.get(`${url}/accoms/${id}`)
+        axios.get(`${accomsUrl}/accoms/${id}`)
         .then((resp) => {
             // console.log('data:', resp.data.data)
             setListing(resp.data.data)
@@ -35,7 +52,7 @@ export const IndividualListingsPage = () => {
        
     }, [])
 
-    
+    // TODO: connect to backend after left join to booking table is created 
 
     return ( 
         <div className='mx-12'>
@@ -68,6 +85,13 @@ export const IndividualListingsPage = () => {
                         onChange={(startDate, endDate) => {
                             handleDates(startDate, endDate)}}
                     />
+
+                    <button
+                        className="mt-4 rounded-xl bg-blue-400 text-white w-full h-8"
+                        onClick={createBooking}
+                    >
+                        Book Now
+                    </button>
                 </div>
             </div>
         </div>

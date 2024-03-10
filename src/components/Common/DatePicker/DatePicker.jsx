@@ -19,13 +19,11 @@ export const DatePicker = ({
     if (!startDate || date < startDate) {
       setStartDate(new Date(date));
       onChange(startDate, null);
-      // return;
     }
 
     if (!endDate || date > endDate) {
       setEndDate(new Date(date));
       onChange(startDate, endDate);
-      // return;
     }
   };
 
@@ -46,7 +44,7 @@ export const DatePicker = ({
             startDate &&
             date <= (endDate ?? startDate) &&
             date >= startDate
-              ? "selected"
+              ? "bg-blue-400 text-white"
               : ""
           }
         />
