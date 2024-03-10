@@ -1,9 +1,10 @@
 import React, { useState, useRef } from "react";
 import logo from "../../assets/logo/long-logo.png";
-import SearchBar from "../Search/SearchBar";
+import SearchBar from "./SearchBar";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useClickAway } from "react-use";
+import { Link } from "react-router-dom";
 
 export const Header = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -27,10 +28,7 @@ export const Header = () => {
     "bg-white",
     "py-8",
     "z-50",
-    {
-      "h-[7rem]": isExpanded,
-      "h-[7rem]": !isExpanded,
-    }
+    "h-[7rem]"
   );
 
   const searchContainerClasses = clsx(
@@ -74,11 +72,12 @@ export const Header = () => {
     "rounded-full",
     "bg-primary",
     "text-neutral-content",
-    "text-slate-600 flex", {
-       "items-center": !isExpanded, 
-       "items-start": isExpanded,
+    "text-slate-600 flex",
+    {
+      "items-center": !isExpanded,
+      "items-start": isExpanded,
     }
-  )
+  );
 
   return (
     <>
@@ -88,13 +87,13 @@ export const Header = () => {
       >
         <div className={headerContainerClasses}>
           <div>
-            <img src={logo} height={50} width={172} alt="Logo" />
+            <img src={logo} height={50} width={172} alt="" />
           </div>
 
           {isExpanded ? (
-            <SearchBar toggleExpanded={ toggleExpanded } />
+            <SearchBar toggleExpanded={toggleExpanded} />
           ) : (
-            <button onClick={ toggleExpanded } className={searchContainerClasses}>
+            <button onClick={toggleExpanded} className={searchContainerClasses}>
               <div className="input flex items-center border-r">
                 <p>Anywhere</p>
               </div>
@@ -116,8 +115,11 @@ export const Header = () => {
               role="button"
               className="btn btn-ghost btn-circle avatar"
             >
-              <div className={ userIconClasses }>
-                <img src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg" />
+              <div className={userIconClasses}>
+                <img
+                  src="https://daisyui.com/images/stock/photo-1534528741775-53994a69daeb.jpg"
+                  alt=""
+                />
               </div>
             </div>
             <ul
@@ -136,6 +138,15 @@ export const Header = () => {
               <li>
                 <a>Logout</a>
               </li>
+              <hr className="bg-red-500" />
+              <li>
+                <Link to={"/login"} className="justify-between">
+                  Login
+                </Link>
+                <Link to={"/signup"} className="justify-between">
+                  Sign-up
+                </Link>
+              </li>
             </ul>
           </div>
 
@@ -146,7 +157,8 @@ export const Header = () => {
       </div> */}
         </div>
       </header>
-      <div className="fixed top-0 left-0 w-full h-full z-40">
+      {/* add h-full for full modal */}
+      <div className="fixed top-0 left-0 w-full h-15 z-40">
         <div className={modalClasses}></div>
       </div>
     </>
