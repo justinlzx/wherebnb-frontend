@@ -4,6 +4,8 @@ import { Outlet } from 'react-router-dom'
 import { Header } from './components/Header/Header'
 import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import { ReservationsPage } from "./components/pages/ReservationsPage";
+
 
 export const App = () => {
 
@@ -17,9 +19,9 @@ export const App = () => {
         <Header />
       </div>
       <div>
-        <Outlet />
+        <ReservationsPage />
       </div>
-      <ToastContainer />
+
     </div>
   );
 }
