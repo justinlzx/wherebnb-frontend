@@ -13,6 +13,7 @@
     "date-fns": "^3.3.1",
     "dayjs": "^1.11.10",
     "react": "^18.2.0",
+    "react-calendar": "^4.8.0",
     "react-daisyui": "^5.0.0",
     "react-date-range": "*",
     "react-dom": "^18.2.0",

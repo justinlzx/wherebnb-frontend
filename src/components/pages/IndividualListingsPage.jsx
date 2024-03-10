@@ -2,8 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios'
 import { useState } from 'react';
-import { isModifier } from 'typescript';
-
+import { DatePicker } from '../Common/DatePicker/DatePicker'
 
 export const IndividualListingsPage = () => {
 
@@ -14,6 +13,17 @@ export const IndividualListingsPage = () => {
 
     })
 
+    const [dates, setDates] = useState({
+        startDate: null,
+        endDate: null
+    })
+
+    const handleDates = (startDate, endDate) => {
+       if (startDate !== null && endDate !== null) {
+        setDates({ startDate, endDate });
+        }
+    }
+
 
     // TODO: use this useEffect when backend is ready 
     useEffect(() => {
@@ -21,12 +31,10 @@ export const IndividualListingsPage = () => {
         .then((resp) => {
             // console.log('data:', resp.data.data)
             setListing(resp.data.data)
-            console.log(listing.image_1)
         })
        
     }, [])
 
-    console.log(listing)
     
 
     return ( 
@@ -34,7 +42,7 @@ export const IndividualListingsPage = () => {
             <div>
                 <h1 className='text-4xl font-bold my-2'>{listing.name}</h1>
             </div>
-            <div className="grid grid-cols-3">
+            <div className="grid grid-cols-3 gap-12">
                 <div className="col-span-2">
                     <div className="h-96 carousel rounded-box object-cover">
                         {
@@ -50,8 +58,16 @@ export const IndividualListingsPage = () => {
                     <h3 className="text-2xl">Description</h3>
                     <p>{listing.description}</p>
                 </div>
-                <div className="col-span-1">
+                <div className="col-span-1 border-2 border-slate-400 rounded-xl p-4 h-fit">
                     {/* calendar and booking panel */}
+                    <DatePicker 
+                        values={{
+                            startDate: dates.startDate,
+                            endDate: dates.endDate
+                        }} 
+                        onChange={(startDate, endDate) => {
+                            handleDates(startDate, endDate)}}
+                    />
                 </div>
             </div>
         </div>
