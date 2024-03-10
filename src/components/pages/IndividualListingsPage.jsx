@@ -11,9 +11,7 @@ export const IndividualListingsPage = () => {
     const id = 9
     const accomsUrl = process.env.REACT_APP_ACCOMS_URL
     const bookingUrl = process.env.REACT_APP_BOOKINGS_URL
-    const [listing, setListing] = useState({
-
-    })
+    const [listing, setListing] = useState({})
 
     const [dates, setDates] = useState({
         startDate: null,
@@ -22,7 +20,8 @@ export const IndividualListingsPage = () => {
 
     const handleDates = (startDate, endDate) => {
        if (startDate !== null && endDate !== null) {
-        setDates({ startDate, endDate });
+
+        setDates({ startDate: new Date(startDate), endDate: new Date(endDate) });
         }
     }
 
@@ -30,8 +29,8 @@ export const IndividualListingsPage = () => {
         axios.post(`${bookingUrl}/booking`, {
             listingId: id,
             guestId: 1,
-            startDate: dates.startDate,
-            endDate: dates.endDate
+            startDate: dates.startDate.toISOString(),
+            endDate: dates.endDate.toISOString()
         })
         .then(() => {
             toast.success('Booking created successfully')
@@ -63,8 +62,10 @@ export const IndividualListingsPage = () => {
                 <div className="col-span-2">
                     <div className="h-96 carousel rounded-box object-cover">
                         {
-                            [listing.image_1, listing.image_2, listing.image_3, listing.image_4, listing.image_5].map((image) => {
-                                return  <div className="carousel-item h-ful">
+                            [listing.image_1, listing.image_2, listing.image_3, listing.image_4, listing.image_5].map((image, i) => {
+                                return  <div 
+                                            key={i}
+                                            className="carousel-item h-ful">
                                             <img src={image} />
                                         </div> 
                             })
@@ -75,19 +76,20 @@ export const IndividualListingsPage = () => {
                     <h3 className="text-2xl">Description</h3>
                     <p>{listing.description}</p>
                 </div>
-                <div className="col-span-1 border-2 border-slate-400 rounded-xl p-4 h-fit">
+                <div className="col-span-1 border-2 border-blue-400 rounded-2xl p-4 h-fit">
                     {/* calendar and booking panel */}
                     <DatePicker 
                         values={{
                             startDate: dates.startDate,
                             endDate: dates.endDate
                         }} 
+                        bookings={listing.bookings}
                         onChange={(startDate, endDate) => {
                             handleDates(startDate, endDate)}}
                     />
 
                     <button
-                        className="mt-4 rounded-xl bg-blue-400 text-white w-full h-8"
+                        className="mt-4 rounded-lg bg-blue-400 text-white w-full h-8 font-bold"
                         onClick={createBooking}
                     >
                         Book Now

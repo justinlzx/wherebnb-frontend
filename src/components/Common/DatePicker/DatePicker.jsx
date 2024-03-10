@@ -5,6 +5,7 @@ import "./DatePicker.css";
 
 export const DatePicker = ({
   values,
+  bookings,
   onChange,
 }) => {
   const [startDate, setStartDate] = useState(values.startDate);
@@ -27,10 +28,19 @@ export const DatePicker = ({
     }
   };
 
+  const checkDates = (date) => {
+    
+    const dateToCheck = date.toISOString();
+    if (bookings) {return bookings.some(
+      (booking) =>
+        dateToCheck >= booking.startDate && dateToCheck <= booking.endDate
+    );}
+    return;
+  };
+
   useEffect(() => {
     onChange(startDate, endDate);
   }, [startDate, endDate])
-
 
   return (
     <>
@@ -40,12 +50,16 @@ export const DatePicker = ({
           defaultView="month"
           onClickDay={handleDates}
           tileClassName={({ date, view }) =>
-            view === "month" &&
-            startDate &&
-            date <= (endDate ?? startDate) &&
-            date >= startDate
-              ? "bg-blue-400 text-white"
-              : ""
+            view === "month" && checkDates(date)
+              ? "text-slate-300" // CSS class for disabled dates
+              : startDate &&
+                date <= (endDate ?? startDate) &&
+                date >= startDate
+                ? "bg-blue-400 text-white" // CSS class for selected dates
+                : "text-black" // CSS class for other dates
+          }
+          tileDisabled={({ date, view }) =>
+            view === "month" && checkDates(date)
           }
         />
       </div>
