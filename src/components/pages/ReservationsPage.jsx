@@ -13,9 +13,13 @@ export const ReservationsPage = () => {
                     Request to book
                 </h1>
             </div>
-            <div className="border border-red-500 grid grid-cols-2">
-                <div>hi 1 </div>
-                <div>hi 1 </div>
+            <div className="border border-red-500 grid grid-cols-2 rounded-lg p-4 px-8">
+                <div className="border border-green-400">
+                    <h1 className="font-bold text-2xl">
+                        Your trip
+                    </h1>
+                </div>
+                <div className="border border-amber-600">hi 1 </div>
             </div>
         </div>
     )
