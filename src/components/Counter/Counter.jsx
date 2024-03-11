@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useSearchStore } from "../../store";
 
 const CountIcon = ({ icon, onClick }) => {

@@ -1,49 +1,86 @@
+import { useCallback, useState, useEffect } from 'react';
 import listingsData from "../../listingsData";
-import { Link } from "react-router-dom";
 import { InfoCard } from "../Cards/InfoCard";
-//import browseStay from "../../assets/browseStay.jpg";
+import { countries } from '../../constants/countries';
+import axios from 'axios';
+
+
 
 export const ListingsPage = () => {
+
+  const [filters, setFilters ] = useState({
+    query: "",
+    price: 0,
+    country: "",
+    numRooms: 0
+  })
+
+  const [listings, setListings] = useState()
+
+  // const getListings = useCallback( async () => {
+  //   await axios.get(`${process.env.REACT_APP_ACCOMS_URL}/accoms`)
+  //     .then((res) => {
+  //       console.log(res)
+  //       setListings(res.data)
+  //     })
+  // })
+
+  // useEffect(() => {
+  //   getListings()
+  // }, [filters])
+
   return (
-    <>
-      <div className="flex rounded-lg items-center justify-center w-full bg-cover bg-full bg-center h-36 bg-gradient-to-r from-primary to-blue-500">
-        <Link
-          to={"/results"}
-          className="rounded-full bg-primary-700 hover:bg-secondary-700 cursor-pointer px-4 py-2 text-white bg-primary"
-        >
-          Browse Stays
-        </Link>
+    <div className="m-6">
+      {/* search bar  */}
+      <div>
+          <input 
+            type="text" 
+            name="price"
+            value={filters.query}
+            onChange={(e) => setFilters({...filters, query: e.target.value})}
+            placeholder="Find accomodation"
+            className="border-2 border-slate-300 rounded-lg w-full p-1"
+          />
       </div>
-          <div className="grid grid-cols-4 md:grid-cols-auto-cols-fr gap-8 md:gap-6 mt-4">
+
+      <div className="flex py-2 gap-4">
+        <div className='w-32'>
+          <label htmlFor="country">Country:</label>
+          <details className="dropdown block">
+            <summary className="m-1 btn">{filters.country || countries[0] }</summary>
+            <ul className="p-2 shadow menu dropdown-content z-[1] bg-base-100 rounded-box w-96 h-64 overflow-y-scroll">
+              {
+                countries.map((country) => 
+                  <li 
+                    key={country}
+                    onClick={() => setFilters({...filters, country: country})}
+                  ><a>{country}</a></li>
+                )
+              }
+            </ul>
+          </details>
+        </div>
+        <div className=''>
+          <label htmlFor="country">Number of Rooms:</label>
+          <input type="number" placeholder="Number of Rooms" className="input max-w-xs border-2 border-slate-300 rounded-lg p-2 block mt-1 text-right w-3/4" 
+          alue={filters.numRooms} onChange={
+            (e) => setFilters({...filters, numRooms: +e.target.value}) 
+          }
+          />
+        </div>
+        <div className='w-1/3'>
+          <label htmlFor="price">Price Less Than: {filters.price}</label>
+          <input type="range" min="0" max="500" value={filters.price} onChange={
+            (e) => setFilters({...filters, price: +e.target.value}) 
+          } className="range my-4"  />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-4 md:grid-cols-auto-cols-fr gap-8 md:gap-6 mt-4">
         {listingsData.map((listing) => (
-            <InfoCard listing={listing} key={listing.id} />
+          <InfoCard listing={listing} key={listing.id} />
         ))}
     </div>
-    </>
+    </div>
   );
 };
-
-// implement this after the backend server is connected
-// export const ListingsPage = () => {
-//     const [listingsData, setListingsData] = useState([]);
-
-//     useEffect(() => {
-//         const fetchData = async () => {
-//             try {
-//                 const res = await fetch('/api/search');
-//                 const data = await res.json();
-//                 setListingsData(data);
-//             } catch (error) {
-//                 console.error('Error fetching data:', error);
-//             }
-//         }
-//         fetchData();
-//     }, []);
-
-//     return (
-//         <div>
-//             <h1>Listings Page</h1>
-
-//         </div>
-//     );
-// }

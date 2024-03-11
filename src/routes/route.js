@@ -3,9 +3,10 @@ import { App } from '../App';
 import { ListingsPage } from '../components/pages/ListingsPage';
 import { LoginPage } from '../components/pages/LoginPage';
 import { Results } from '../components/pages/Results';
+import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
 
 
-const routes = [
+export const routes = [
     {
         name: 'home',
         path: '/',
@@ -13,9 +14,14 @@ const routes = [
         children: [
             {
                 name: 'listings',
-                path: '/listings',
+                path: 'listings',
                 element: <ListingsPage/>
             }, 
+            {
+                name: 'individual-listings',
+                path: 'listings/:id',
+                element: <IndividualListingsPage />
+            },
             {
                 name: 'login',
                 path: '/login',
@@ -27,7 +33,7 @@ const routes = [
                 element: <Results/>
             }, 
             
-    ]
+        ]
     }
 ]
 
