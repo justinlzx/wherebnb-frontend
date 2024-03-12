@@ -1,5 +1,5 @@
 import left from "../../assets/icons/left.png";
-
+import star from "../../assets/icons/star.png";
 
 
 export const ReservationsPage = () => {
@@ -49,21 +49,48 @@ export const ReservationsPage = () => {
                     </div>
                     <hr className="mt-10 "/>
                     {/* below the line */}
-                    <div className="mt-10 rounded-lg bg-neutral-100 h-40 text-center font-bold">
+                    <button className="btn btn-block mt-10 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 h-16 text-white text-center grid place-content-center text-xl font-semibold">
                         {/* call Stripe API */}
-                        Stripe API <br />
-                        OR Payment Details if Stripe cannot be called here
-                    </div>
+                        Make payment for reservation
+                    </button>
                 </div>
                 {/* Second Half */}
-                <div className="flex justify-center">
+                <div className="flex justify-center ">
                     <div className="card w-4/5 bg-base-100 border-2 border-neutral-100 ">
-                        <figure className="h-52"><img src="https://source.unsplash.com/WLUHO9A_xik/200x200" alt="specific" className="w-full"/></figure>
+                        <figure className="h-52"><img src="https://images.unsplash.com/photo-1623050804066-42bcedb4e81d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" alt="specific" className="w-full"/></figure>
                         <div className="card-body">
-                            <h2 className="card-title">Shoes!</h2>
-                            <p>If a dog chews shoes whose shoes does he choose?</p>
-                            <div className="card-actions justify-end">
-                            <button className="btn btn-primary">Buy Now</button>
+                            <div className="flex justify-between">
+                                <h2 className="card-title text-lg">Cozy Cottage</h2>
+                                <div className="flex items-center">
+                                    <p className="text-md font-semibold mr-4">4.5</p>
+                                    <img src={star} alt="" className="h-5"/>
+                                </div>
+                            </div>
+                            <hr className="mt-2"/>
+                            {/* Pricing Details */}
+                            <div className="mt-2">
+                                <h1 className="font-semibold text-lg">
+                                    Pricing details
+                                </h1>
+                                {/* To be replaced with dynamic data */}
+                                <div className="flex justify-between">
+                                    <div className="underline mt-2">
+                                        $100.00 SGD x 5 nights
+                                    </div>
+                                    <div>  
+                                        $500.00 SGD
+                                    </div>
+                                </div>
+                            </div>
+                            {/* Final Price */}
+                            <hr className="mt-2"/>
+                            <div className="mt-2 font-bold flex justify-between">
+                                <div className="">
+                                    Total
+                                </div>
+                                <div>
+                                    $500.00 SGD
+                                </div>
                             </div>
                         </div>
                     </div>
