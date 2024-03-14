@@ -1,8 +1,21 @@
+import axios from "axios";
+import { useEffect } from "react";
 import left from "../../assets/icons/left.png";
 import star from "../../assets/icons/star.png";
 
 
 export const ReservationsPage = () => {
+    // Axios.get comes here
+    // Initialise data here
+    // State stored inside component
+
+    const [num, setNum] = useState(0)
+
+    useEffect(() => {
+        axios.get(url)
+        .then()
+    }, [num])
+
     return (
         <div className="px-20 py-14">
             <div className="flex items-center pb-8">
