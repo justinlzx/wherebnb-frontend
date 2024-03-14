@@ -87,7 +87,10 @@ export const Header = () => {
       >
         <div className={headerContainerClasses}>
           <div>
-            <img src={logo} height={50} width={172} alt="" />
+            <Link to={"/listings"}>
+              <img src={logo} height={50} width={172} alt="" />
+            </Link>
+            
           </div>
 
           {isExpanded ? (
