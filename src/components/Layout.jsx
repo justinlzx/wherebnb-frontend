@@ -1,6 +1,6 @@
 import { Outlet } from "react-router-dom";
 import { Header } from "./Header/Header";
-import { Filter } from "./Filter/Filter";
+
 
 export const Layout = () => {
   return (
