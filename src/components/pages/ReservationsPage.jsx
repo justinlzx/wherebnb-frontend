@@ -9,12 +9,12 @@ export const ReservationsPage = () => {
     // Initialise data here
     // State stored inside component
 
-    const [num, setNum] = useState(0)
+    // const [num, setNum] = useState(0)
 
-    useEffect(() => {
-        axios.get(url)
-        .then()
-    }, [num])
+    // useEffect(() => {
+    //     axios.get(url)
+    //     .then()
+    // }, [num])
 
     return (
         <div className="px-20 py-14">
