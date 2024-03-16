@@ -10,13 +10,17 @@ import {
 export const TypeFilter = () => {
   return (
     <>
-        <InputLabel className="text-sm font-semibold">Type of Place</InputLabel>
-        <RadioGroup
-          aria-labelledby="demo-radio-buttons-group-label"
-          defaultValue="any-type"
-          name="row-radio-buttons-group"
+      <InputLabel className="text-sm font-semibold">Type of Place</InputLabel>
+      <RadioGroup
+        aria-labelledby="demo-radio-buttons-group-label"
+        defaultValue="any-type"
+        name="row-radio-buttons-group"
+      >
+        <Stack
+          spacing={1}
+          direction="row"
+          className="md:flex-row sm:flex-col"
         >
-        <Stack spacing={1} direction ="row">
           <FormControlLabel
             value="any-type"
             control={<Radio />}
@@ -44,9 +48,8 @@ export const TypeFilter = () => {
               </Typography>
             }
           />
-          </Stack>
-        </RadioGroup>
-      
+        </Stack>
+      </RadioGroup>
     </>
   );
 };

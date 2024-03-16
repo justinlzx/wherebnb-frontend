@@ -14,7 +14,7 @@ import { BookingOptions } from "./BookingOptions";
 export const Filter = () => {
   return (
     <>
-      <Box className="py-4">
+      <Box className="py-4 pl-6 w-90">
         <Card className="pb-3 rounded-full">
           <Box className="mb-2 py-2 px-3 bg-slate-300">
             <Stack
