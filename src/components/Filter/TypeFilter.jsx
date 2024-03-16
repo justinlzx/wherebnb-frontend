@@ -18,8 +18,8 @@ export const TypeFilter = () => {
       >
         <Stack
           spacing={1}
-          direction="row"
-          className="md:flex-row sm:flex-col"
+          direction={['column', 'row']}
+          className="flex flex-wrap"
         >
           <FormControlLabel
             value="any-type"
@@ -29,6 +29,7 @@ export const TypeFilter = () => {
                 Any Type
               </Typography>
             }
+            className="w-full md:w-auto" // Set width to full on small screens, auto on larger screens
           />
           <FormControlLabel
             value="room"
@@ -38,6 +39,7 @@ export const TypeFilter = () => {
                 Room
               </Typography>
             }
+            className="w-full md:w-auto" // Set width to full on small screens, auto on larger screens
           />
           <FormControlLabel
             value="entire-house"
@@ -47,6 +49,7 @@ export const TypeFilter = () => {
                 Entire House
               </Typography>
             }
+            className="w-full md:w-auto" // Set width to full on small screens, auto on larger screens
           />
         </Stack>
       </RadioGroup>
