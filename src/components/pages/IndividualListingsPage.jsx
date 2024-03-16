@@ -2,7 +2,7 @@ import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
 import axios from 'axios'
 import { useState } from 'react';
-import { DatePicker } from '../Common/DatePicker/DatePicker'
+import { DatePicker } from '../Common/DatePicker/DatePicker';
 import { toast } from 'react-toastify';
 
 export const IndividualListingsPage = () => {
