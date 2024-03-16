@@ -1,20 +1,26 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import left from "../../assets/icons/left.png";
 import star from "../../assets/icons/star.png";
 
 
 export const ReservationsPage = () => {
-    // Axios.get comes here
-    // Initialise data here
-    // State stored inside component
+// State to store the listing data
+    const [listing, setListing] = useState(null);
 
-    // const [num, setNum] = useState(0)
+    // Assume your JSON data is hosted at some URL. Replace 'url_to_your_json' with the actual URL.
 
-    // useEffect(() => {
-    //     axios.get(url)
-    //     .then()
-    // }, [num])
+    useEffect(() => {
+        axios.get('../../../../listingsData.json') // Assuming your JSON file is named listingsData.json and placed in the public directory
+        .then(response => {
+            const listings = response.data;
+            // Assuming you want to display the first listing or a specific one. Adjust as needed.
+            setListing(listings[5]); // For example, displaying the first listing
+        })
+        .catch(error => console.error("Fetching listings data failed:", error));
+    }, []); // Empty dependency array means this effect runs once after the initial render
+
+    if (!listing) return <div>Loading...</div>;
 
     return (
         <div className="px-20 py-14">
@@ -70,12 +76,12 @@ export const ReservationsPage = () => {
                 {/* Second Half */}
                 <div className="flex justify-center ">
                     <div className="card w-4/5 bg-base-100 border-2 border-neutral-100 ">
-                        <figure className="h-52"><img src="https://images.unsplash.com/photo-1623050804066-42bcedb4e81d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=2371&q=80" alt="specific" className="w-full"/></figure>
+                        <figure className="h-52"><img src={listing.image} alt={listing.name} className="w-full"/></figure>
                         <div className="card-body">
                             <div className="flex justify-between">
-                                <h2 className="card-title text-lg">Cozy Cottage</h2>
+                                <h2 className="card-title text-lg">{listing.name}</h2>
                                 <div className="flex items-center">
-                                    <p className="text-md font-semibold mr-4">4.5</p>
+                                    <p className="text-md font-semibold mr-4">{listing.rating}</p>
                                     <img src={star} alt="" className="h-5"/>
                                 </div>
                             </div>
@@ -88,10 +94,10 @@ export const ReservationsPage = () => {
                                 {/* To be replaced with dynamic data */}
                                 <div className="flex justify-between">
                                     <div className="underline mt-2">
-                                        $100.00 SGD x 5 nights
+                                        ${listing.price} SGD x 5 nights
                                     </div>
                                     <div>  
-                                        $500.00 SGD
+                                        ${listing.price * 5} SGD
                                     </div>
                                 </div>
                             </div>
@@ -102,7 +108,7 @@ export const ReservationsPage = () => {
                                     Total
                                 </div>
                                 <div>
-                                    $500.00 SGD
+                                    ${listing.price * 5} SGD
                                 </div>
                             </div>
                         </div>
