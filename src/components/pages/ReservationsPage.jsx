@@ -11,14 +11,46 @@ export const ReservationsPage = () => {
     // Assume your JSON data is hosted at some URL. Replace 'url_to_your_json' with the actual URL.
 
     useEffect(() => {
-        axios.get('../../../../listingsData.json') // Assuming your JSON file is named listingsData.json and placed in the public directory
+        axios.get(process.env.PUBLIC_URL + '/listingsData.json') // Assuming your JSON file is named listingsData.json and placed in the public directory
         .then(response => {
             const listings = response.data;
             // Assuming you want to display the first listing or a specific one. Adjust as needed.
-            setListing(listings[5]); // For example, displaying the first listing
+            setListing(listings[0]); // For example, displaying the first listing
         })
         .catch(error => console.error("Fetching listings data failed:", error));
     }, []); // Empty dependency array means this effect runs once after the initial render
+
+    const handleMakePayment = () => {
+        // Prepare the data to send. This is an example structure.
+        const dataToSend = {
+            guestId: 1, // pull from session, not dynamic yet
+            listingId: listing.id,
+            startDate: "Sat Mar 16 2024 17:03:26 GMT+0800", // not dynamic yet
+            endDate: "Sun Mar 17 2024 17:03:26 GMT+0800", // not dynamic yet
+            firstName: "Testing", // not dynamic yet
+            lastName: "john", // not dynamic yet
+            email: "dog@dog.com", // not dynamic yet
+            pricePerNight: listing.price,
+            name: listing.name,
+            duration: 3 // not dynamic yet
+            // Reference below
+
+            // Add more details as required by your microservice
+        };
+
+        // URL of your microservice endpoint
+        const endpointUrl = "http://localhost:3004";
+
+        axios.post(endpointUrl, dataToSend)
+        .then(response => {
+            console.log("Payment initiated:", response.data);
+            // Handle successful payment initiation here
+        })
+        .catch(error => {
+            console.error("Error initiating payment:", error);
+            // Handle errors or failed payment initiation here
+        });
+    };
 
     if (!listing) return <div>Loading...</div>;
 
@@ -68,7 +100,7 @@ export const ReservationsPage = () => {
                     </div>
                     <hr className="mt-10 "/>
                     {/* below the line */}
-                    <button className="btn btn-block mt-10 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 h-16 text-white text-center grid place-content-center text-xl font-semibold">
+                    <button className="btn btn-block mt-10 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 h-16 text-white text-center grid place-content-center text-xl font-semibold" onClick={handleMakePayment}>
                         {/* call Stripe API */}
                         Make payment for reservation
                     </button>
@@ -91,7 +123,7 @@ export const ReservationsPage = () => {
                                 <h1 className="font-semibold text-lg">
                                     Pricing details
                                 </h1>
-                                {/* To be replaced with dynamic data */}
+                                {/* To be replaced with dynamic data, not dynamic yet */}
                                 <div className="flex justify-between">
                                     <div className="underline mt-2">
                                         ${listing.price} SGD x 5 nights
