@@ -4,6 +4,7 @@ import { ListingsPage } from '../components/pages/ListingsPage';
 import { LoginPage } from '../components/pages/LoginPage';
 import { Results } from '../components/pages/Results';
 import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
+import { ReservationsPage } from '../components/pages/ReservationsPage';
 
 
 export const routes = [
@@ -14,14 +15,19 @@ export const routes = [
         children: [
             {
                 name: 'listings',
-                path: 'listings',
+                path: '/listings',
                 element: <ListingsPage/>
             }, 
             {
                 name: 'individual-listings',
-                path: 'listings/:id',
+                path: '/listings/:id',
                 element: <IndividualListingsPage />
             },
+            // {
+            //     name: 'reservations',
+            //     path: '/reservations',
+            //     element: <ReservationsPage/>
+            // },
             {
                 name: 'login',
                 path: '/login',

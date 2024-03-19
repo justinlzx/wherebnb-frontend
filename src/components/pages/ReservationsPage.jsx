@@ -2,11 +2,30 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import left from "../../assets/icons/left.png";
 import star from "../../assets/icons/star.png";
+import { toast } from "react-toastify";
+import 'react-toastify/dist/ReactToastify.css';
 
 
 export const ReservationsPage = () => {
 // State to store the listing data
     const [listing, setListing] = useState(null);
+    const bookingUrl = process.env.REACT_APP_BOOKINGS_URL
+
+
+    const createBooking = () => {
+        axios.post(`${bookingUrl}/booking`, {
+            // listingId: id,
+            guestId: 1,
+            // startDate: dates.startDate.toISOString(),
+            // endDate: dates.endDate.toISOString()
+        })
+        .then(() => {
+            toast.success('Booking created successfully')
+        })
+        .catch((err) => {
+            toast.error('Error creating booking:', err)
+        })
+    };
 
     // Assume your JSON data is hosted at some URL. Replace 'url_to_your_json' with the actual URL.
 
