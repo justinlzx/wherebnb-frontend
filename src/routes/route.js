@@ -23,11 +23,11 @@ export const routes = [
                 path: '/listings/:id',
                 element: <IndividualListingsPage />
             },
-            // {
-            //     name: 'reservations',
-            //     path: '/reservations',
-            //     element: <ReservationsPage/>
-            // },
+            {
+                name: 'reservations',
+                path: '/reservations',
+                element: <ReservationsPage/>
+            },
             {
                 name: 'login',
                 path: '/login',

@@ -71,7 +71,10 @@ export const IndividualListingsPage = () => {
                             handleDates(startDate, endDate)}}
                     />
 
-                    <Link to="/reservations" >
+                    <Link to="/reservations" state={{
+                        ...listing,
+                        dates
+                    }}>
                         <button
                             className="mt-4 rounded-lg bg-blue-400 text-white w-full h-8 font-bold"
                         >

@@ -1,77 +1,76 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
 import left from "../../assets/icons/left.png";
 import star from "../../assets/icons/star.png";
 import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
+import { useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 
 export const ReservationsPage = () => {
 // State to store the listing data
-    const [listing, setListing] = useState(null);
     const bookingUrl = process.env.REACT_APP_BOOKINGS_URL
+    const location = useLocation()
 
+    const {
+        dates: {
+            startDate,
+            endDate
+        },
+        id: listingId,
+        name: listingName,
+        price,
+        rating,
+        image_1: image,
 
-    const createBooking = () => {
-        axios.post(`${bookingUrl}/booking`, {
-            // listingId: id,
-            guestId: 1,
-            // startDate: dates.startDate.toISOString(),
-            // endDate: dates.endDate.toISOString()
-        })
-        .then(() => {
-            toast.success('Booking created successfully')
-        })
-        .catch((err) => {
-            toast.error('Error creating booking:', err)
-        })
-    };
+    } = location.state
 
-    // Assume your JSON data is hosted at some URL. Replace 'url_to_your_json' with the actual URL.
+    const getNumberOfNights = (checkInDate, checkOutDate) => {
+        const oneDay = 1000 * 60 * 60 * 24; // milliseconds in a day
+        const diffInTime = checkOutDate.getTime() - checkInDate.getTime();
+        const diffInDays = Math.round(diffInTime / oneDay);
+        return diffInDays;
+    }
 
-    useEffect(() => {
-        axios.get(process.env.PUBLIC_URL + '/listingsData.json') // Assuming your JSON file is named listingsData.json and placed in the public directory
-        .then(response => {
-            const listings = response.data;
-            // Assuming you want to display the first listing or a specific one. Adjust as needed.
-            setListing(listings[0]); // For example, displaying the first listing
-        })
-        .catch(error => console.error("Fetching listings data failed:", error));
-    }, []); // Empty dependency array means this effect runs once after the initial render
+    const formatDate = (date) =>{
+        return date.toLocaleDateString('en-GB', {
+            day: '2-digit',
+            month: 'short',
+            year: 'numeric'
+        });
+    }
+    
+    const numNights = getNumberOfNights(startDate, endDate)
 
-    const handleMakePayment = () => {
+    const createBooking = async () => {
         // Prepare the data to send. This is an example structure.
-        const dataToSend = {
+        const payload = {
             guestId: 1, // pull from session, not dynamic yet
-            listingId: listing.id,
-            startDate: "Sat Mar 16 2024 17:03:26 GMT+0800", // not dynamic yet
-            endDate: "Sun Mar 17 2024 17:03:26 GMT+0800", // not dynamic yet
+            listingId,
+            startDate, 
+            endDate, 
             firstName: "Testing", // not dynamic yet
             lastName: "john", // not dynamic yet
             email: "dog@dog.com", // not dynamic yet
-            pricePerNight: listing.price,
-            name: listing.name,
-            duration: 3 // not dynamic yet
-            // Reference below
-
-            // Add more details as required by your microservice
+            pricePerNight: price,
+            name: listingName,
+            duration: numNights
         };
 
-        // URL of your microservice endpoint
-        const endpointUrl = "http://localhost:3004";
-
-        axios.post(endpointUrl, dataToSend)
+        await axios.post(`${process.env.REACT_APP_PROCESS_BOOKING_URL}/payment`, payload)
         .then(response => {
-            console.log("Payment initiated:", response.data);
+            // console.log("Payment initiated:", response.data);
             // Handle successful payment initiation here
+            toast.success('Payment initiated successfully')
         })
         .catch(error => {
-            console.error("Error initiating payment:", error);
+            // console.error("Error initiating payment:", error);
             // Handle errors or failed payment initiation here
+            toast.error('Error initiating payment:', error)
         });
     };
 
-    if (!listing) return <div>Loading...</div>;
+    if (!location.state) return <div>Loading...</div>;
 
     return (
         <div className="px-20 py-14">
@@ -96,43 +95,29 @@ export const ReservationsPage = () => {
                                     Dates
                                 </h1>
                                 <h1 className="font-semibold mt-1">
-                                    {/* To be replaced with dynamic data */}
-                                    11–16 Mar
+                                    {formatDate(startDate)} - {formatDate(endDate)}
                                 </h1>
                             </div>
-                            <button className="btn rounded-lg bg-neutral-100">Edit</button>
+                            <Link to={`/listings/${listingId}`}><button className="btn rounded-lg bg-neutral-100">Edit</button></Link>
                         </div>
                     </div>
-                    <div className="mt-6">
-                        <div className="flex justify-between">
-                            <div>
-                                <h1 className="font-bold">
-                                    Guests
-                                </h1>
-                                <h1 className="font-semibold mt-1">
-                                    {/* To be replaced with dynamic data */}
-                                    1 Guest
-                                </h1>
-                            </div>
-                            <button className="btn rounded-lg bg-neutral-100">Edit</button>
-                        </div>
-                    </div>
+                   
                     <hr className="mt-10 "/>
                     {/* below the line */}
-                    <button className="btn btn-block mt-10 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 h-16 text-white text-center grid place-content-center text-xl font-semibold" onClick={handleMakePayment}>
+                    <button className="btn btn-block mt-10 rounded-lg bg-gradient-to-r from-cyan-500 to-blue-500 h-16 text-white text-center grid place-content-center text-xl font-semibold" onClick={createBooking}>
                         {/* call Stripe API */}
-                        Make payment for reservation
+                       Book
                     </button>
                 </div>
                 {/* Second Half */}
                 <div className="flex justify-center ">
                     <div className="card w-4/5 bg-base-100 border-2 border-neutral-100 ">
-                        <figure className="h-52"><img src={listing.image} alt={listing.name} className="w-full"/></figure>
+                        <figure className="h-52"><img src={image} alt={listingName} className="w-full"/></figure>
                         <div className="card-body">
                             <div className="flex justify-between">
-                                <h2 className="card-title text-lg">{listing.name}</h2>
+                                <h2 className="card-title text-lg">{listingName}</h2>
                                 <div className="flex items-center">
-                                    <p className="text-md font-semibold mr-4">{listing.rating}</p>
+                                    <p className="text-md font-semibold mr-4">{rating.toFixed(2)}</p>
                                     <img src={star} alt="" className="h-5"/>
                                 </div>
                             </div>
@@ -145,10 +130,10 @@ export const ReservationsPage = () => {
                                 {/* To be replaced with dynamic data, not dynamic yet */}
                                 <div className="flex justify-between">
                                     <div className="underline mt-2">
-                                        ${listing.price} SGD x 5 nights
+                                        ${price} SGD x {numNights} nights
                                     </div>
                                     <div>  
-                                        ${listing.price * 5} SGD
+                                        ${price * numNights} SGD
                                     </div>
                                 </div>
                             </div>
@@ -159,7 +144,7 @@ export const ReservationsPage = () => {
                                     Total
                                 </div>
                                 <div>
-                                    ${listing.price * 5} SGD
+                                    ${price * numNights} SGD
                                 </div>
                             </div>
                         </div>
