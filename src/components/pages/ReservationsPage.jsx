@@ -59,13 +59,9 @@ export const ReservationsPage = () => {
 
         await axios.post(`${process.env.REACT_APP_PROCESS_BOOKING_URL}/payment`, payload)
         .then(response => {
-            // console.log("Payment initiated:", response.data);
-            // Handle successful payment initiation here
             toast.success('Payment initiated successfully')
         })
         .catch(error => {
-            // console.error("Error initiating payment:", error);
-            // Handle errors or failed payment initiation here
             toast.error('Error initiating payment:', error)
         });
     };
@@ -75,9 +71,11 @@ export const ReservationsPage = () => {
     return (
         <div className="px-20 py-14">
             <div className="flex items-center pb-8">
-                <button className="btn btn-circle ">
-                    <img src={left} alt="" className="h-6"/>
-                </button>
+                <Link to={`/listings/${listingId}`}>
+                    <button className="btn btn-circle ">
+                        <img src={left} alt="" className="h-6"/>
+                    </button>
+                </Link>
                 <h1 className="text-4xl font-bold ml-4">
                     Request to book
                 </h1>
