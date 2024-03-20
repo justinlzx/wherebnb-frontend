@@ -3,14 +3,12 @@ import { useEffect } from 'react';
 import axios from 'axios'
 import { useState } from 'react';
 import { DatePicker } from '../Common/DatePicker/DatePicker'
-import { toast } from 'react-toastify';
+import { Link } from 'react-router-dom'
 
 export const IndividualListingsPage = () => {
 
-    // const { id } = useParams()
-    const id = 9
+    const { id } = useParams()
     const accomsUrl = process.env.REACT_APP_ACCOMS_URL
-    const bookingUrl = process.env.REACT_APP_BOOKINGS_URL
     const [listing, setListing] = useState({})
 
     const [dates, setDates] = useState({
@@ -25,33 +23,18 @@ export const IndividualListingsPage = () => {
         }
     }
 
-    const createBooking = () => {
-        axios.post(`${bookingUrl}/booking`, {
-            listingId: id,
-            guestId: 1,
-            startDate: dates.startDate.toISOString(),
-            endDate: dates.endDate.toISOString()
-        })
-        .then(() => {
-            toast.success('Booking created successfully')
-        })
-        .catch((err) => {
-            toast.error('Error creating booking:', err)
-        })
-    };
-
-
+    
     // TODO: use this useEffect when backend is ready 
     useEffect(() => {
         axios.get(`${accomsUrl}/accoms/${id}`)
         .then((resp) => {
-            // console.log('data:', resp.data.data)
             setListing(resp.data.data)
         })
-       
     }, [])
 
     // TODO: connect to backend after left join to booking table is created 
+
+    console.log('listing:', listing)
 
     return ( 
         <div className='mx-12'>
@@ -65,7 +48,7 @@ export const IndividualListingsPage = () => {
                             [listing.image_1, listing.image_2, listing.image_3, listing.image_4, listing.image_5].map((image, i) => {
                                 return  <div 
                                             key={i}
-                                            className="carousel-item h-ful">
+                                            className="carousel-item h-full">
                                             <img src={image} />
                                         </div> 
                             })
@@ -88,12 +71,17 @@ export const IndividualListingsPage = () => {
                             handleDates(startDate, endDate)}}
                     />
 
-                    <button
-                        className="mt-4 rounded-lg bg-blue-400 text-white w-full h-8 font-bold"
-                        onClick={createBooking}
-                    >
-                        Book Now
-                    </button>
+                    <Link to="/reservations" state={{
+                        ...listing,
+                        dates
+                    }}>
+                        <button
+                            className="mt-4 rounded-lg bg-blue-400 text-white w-full h-8 font-bold"
+                        >
+                            Book Now
+                        </button>
+                    </Link>
+                       
                 </div>
             </div>
         </div>
