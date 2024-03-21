@@ -9,7 +9,9 @@ export const IndividualListingsPage = () => {
 
     const { id } = useParams()
     const accomsUrl = process.env.REACT_APP_ACCOMS_URL
+    const bookingsUrl = process.env.REACT_APP_BOOKINGS_URL
     const [listing, setListing] = useState({})
+    const [bookings, setBookings] = useState([])
 
     const [dates, setDates] = useState({
         startDate: null,
@@ -30,11 +32,13 @@ export const IndividualListingsPage = () => {
         .then((resp) => {
             setListing(resp.data.data)
         })
+        axios.get(`${bookingsUrl}/booking/${id}`)
+        .then((resp) => {
+            setBookings(resp.data.data)
+        })
     }, [])
 
-    // TODO: connect to backend after left join to booking table is created 
 
-    console.log('listing:', listing)
 
     return ( 
         <div className='mx-12'>
@@ -66,7 +70,7 @@ export const IndividualListingsPage = () => {
                             startDate: dates.startDate,
                             endDate: dates.endDate
                         }} 
-                        bookings={listing.bookings}
+                        bookings={bookings}
                         onChange={(startDate, endDate) => {
                             handleDates(startDate, endDate)}}
                     />
