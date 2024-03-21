@@ -50,7 +50,6 @@ export const routes = [
                 path: '/results',
                 element: <SearchResultsPage/>
             }
-            
     ]
     }
 ]

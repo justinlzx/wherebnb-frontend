@@ -6,6 +6,7 @@ import { LoginPage } from "./components/pages/LoginPage";
 import { SignUpPage } from "./components/pages/SignUpPage";
 import { Layout } from "./components/Layout";
 import { Reviews } from "./components/pages/ReviewPage";
+import { SearchResultsPage } from "./components/pages/SearchResultsPage";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { initializeApp } from "firebase/app";
 
@@ -35,7 +36,8 @@ export const App = () => {
           <Route index element={<ListingsPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/signup" element={<SignUpPage/>}/>
-          <Route path="/results" element={<Results/>}/>
+          <Route path="/reviews" element={<Reviews/>}/>
+          <Route path="/results" element={<SearchResultsPage/>}/>
         </Route>
         </Routes>
       </ThemeProvider>
