@@ -6,6 +6,7 @@ import { Reviews } from '../components/pages/ReviewPage';
 import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
 import { ReservationsPage } from '../components/pages/ReservationsPage';
 import { SignUpPage } from '../components/pages/SignUpPage';
+import { SearchResultsPage } from '../components/pages/SearchResultsPage';
 
 
 export const routes = [
@@ -43,9 +44,14 @@ export const routes = [
                 name: 'signup',
                 path: '/signup',
                 element: <SignUpPage/>
+            },
+            {
+                name: 'results',
+                path: '/results',
+                element: <SearchResultsPage/>
             }
             
-        ]
+    ]
     }
 ]
 
