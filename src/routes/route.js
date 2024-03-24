@@ -2,9 +2,9 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from '../App';
 import { ListingsPage } from '../components/pages/ListingsPage';
 import { LoginPage } from '../components/pages/LoginPage';
-import { Results } from '../components/pages/Results';
+// import { Results } from '../components/pages/Results';
 import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
-
+import { Reviews } from '../components/pages/Reviews';
 
 export const routes = [
     {
@@ -27,11 +27,16 @@ export const routes = [
                 path: '/login',
                 element: <LoginPage/>  
             }, 
+            // {
+            //     name: 'results',
+            //     path: '/results',
+            //     element: <Results/>
+            // }, 
             {
-                name: 'results',
-                path: '/results',
-                element: <Results/>
-            }, 
+                name: 'reviews',
+                path: '/reviews',
+                element: <Reviews/>
+            }
             
         ]
     }
