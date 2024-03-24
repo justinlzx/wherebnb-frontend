@@ -25,6 +25,76 @@ export const Reviews = () => {
   }, [reviewsUrl]);
 
   const renderReviewItem = (review) => {
+  const handleCommentChange = (e) => {
+    setComment(e.target.value);
+  };
+
+  const handleItemAvailabilityChange = (item, value) => {
+    setAvailability({
+      ...availability,
+      [item]: value,
+    });
+  };
+
+  const handleSubmit = () => {
+
+    const reviewData = {
+      listingId: 1, 
+      userId: 1, 
+      review: comment, 
+      rating: 1, 
+    }
+
+    //API Call to Reviews Service 
+    axios.post(`${reviewsUrl}/`, {
+      listingId: 1, 
+      userId: 1, 
+      review: comment, 
+      rating: 1, 
+    })
+    .then(() => {
+      toast.success("Review submitted successfully"); 
+    })
+    .catch((error) => {
+      console.log("Error submitting review: ", error);
+      toast.error("Error submitting review", error )
+    })
+    
+    // console.log(`Review submitted: ${comment}`);
+    // console.log("Ratings:", rating);
+    // console.log("Items Availability:", availability);
+    setRating({
+      cleanliness: 0,
+      accuracy: 0,
+      checkInProcess: 0,
+      communication: 0,
+      location: 0,
+      valueForMoney: 0,
+    });
+    setComment("");
+    setAvailability({
+      bedLinens: false,
+      pillows: false,
+      soap: false,
+      toiletPaper: false,
+      towels: false,
+    });
+  };
+
+  //TODO: useEffect when backend is Ready to fetch reviews
+  useEffect(() => {
+    axios
+      .get(reviewsUrl)
+      .then((response) => {
+        console.log(response.data.data);
+        setReviews(response.data.data);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }, []);
+
+  const renderRatingSection = (category, label) => {
     return (
       <Box key={review.id} className="review-item">
         <Typography variant="h6">{review.title}</Typography>
