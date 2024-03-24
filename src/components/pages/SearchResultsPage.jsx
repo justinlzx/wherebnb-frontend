@@ -14,10 +14,9 @@ export const SearchResultsPage = () => {
 
   const filteredListings = listingsData.filter(listing =>
     listing.location === locationQuery &&
-    new Date(listing.startDate) >= startDateQuery &&
-    new Date(listing.endDate) <= endDateQuery
-   
-  );
+    new Date(listing.startDate) <= startDateQuery &&
+    new Date(listing.endDate) >= endDateQuery
+);
 
   return (
     <div>
