@@ -5,6 +5,7 @@ import { LoginPage } from '../components/pages/LoginPage';
 import { Results } from '../components/pages/Results';
 import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
 import { ReservationsPage } from '../components/pages/ReservationsPage';
+import { SignUpPage } from '../components/pages/SignUpPage';
 
 
 export const routes = [
@@ -38,6 +39,11 @@ export const routes = [
                 path: '/results',
                 element: <Results/>
             }, 
+            {
+                name: 'signup',
+                path: '/signup',
+                element: <SignUpPage/>
+            }
             
         ]
     }
