@@ -1,66 +1,93 @@
-import { useState } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
+import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
 import { loginFields } from './formFields';
 import Input from './Input';
 import FormAction from './FormAction';
 import FormExtra from './FormExtra';
 
+// Create a context to manage the form data
+const FormContext = createContext();
 
-const fields = loginFields;
-let fieldsState = {};
-fields.forEach(field=>fieldsState[field.id]='');
+// Custom hook to use the form context
+const useFormContext = () => useContext(FormContext);
 
-export default function Login(){
-    const [loginState,setLoginState]=useState(fieldsState);
-
-    const handleChange=(e)=>{
-        setLoginState({...loginState,[e.target.id]:e.target.value})
+// Provider component to manage the form data
+const FormProvider = ({ children }) => {
+  const [loginState, setLoginState] = useState({});
+  
+  // Load stored data when component mounts
+  useEffect(() => {
+    const storedData = JSON.parse(localStorage.getItem('loginState'));
+    if (storedData) {
+      setLoginState(storedData);
     }
+  }, []);
 
-    const handleSubmit=(e)=>{
-        e.preventDefault(); 
-        authenticateUser(); 
-    }
+  // Function to update form data
+  const updateFormData = (data) => {
+    setLoginState(data);
+    localStorage.setItem('loginState', JSON.stringify(data));
+  };
 
-    const authenticateUser=()=>{
-        //api endpoint to authenticate user ; check with Shay 
-        // const endpoint=`https://api.loginradius.com/identity/v2/auth/login?apikey=${apiKey}`;
-        //  fetch(endpoint,
-        //      {
-        //      method:'POST',
-        //      headers: {
-        //      'Content-Type': 'application/json'
-        //      },
-        //      body:JSON.stringify(loginFields)
-        //      }).then(response=>response.json())
-        //      .then(data=>{
-        //         //API Success from LoginRadius Login API
-        //      })
-        //      .catch(error=>console.log(error))
-    }
+  return (
+    <FormContext.Provider value={{ loginState, updateFormData }}>
+      {children}
+    </FormContext.Provider>
+  );
+};
 
-    return(
-        <form className="mt-8 space-y-6">
-        <div className="-space-y-px">
-            {
-                fields.map(field=>
-                        <Input
-                            key={field.id}
-                            handleChange={handleChange}
-                            value={loginState[field.id]}
-                            labelText={field.labelText}
-                            labelFor={field.labelFor}
-                            id={field.id}
-                            name={field.name}
-                            type={field.type}
-                            isRequired={field.isRequired}
-                            placeholder={field.placeholder}
-                    />
-                )
-            }
-        </div>
+// Login component
+const Login = () => {
+  const { loginState, updateFormData } = useFormContext();
+  const navigate = useNavigate(); // Initialize useNavigate
 
-        <FormExtra/>
-        <FormAction handleSubmit={handleSubmit} text="Login"/>
-      </form>
-    )
-}
+  const handleChange = (e) => {
+    const { id, value } = e.target;
+    const updatedState = { ...loginState, [id]: value };
+    updateFormData(updatedState);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // Redirect to another page upon successful login
+    navigate('/reviews');
+  };
+
+  return (
+    <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
+      <div className="-space-y-px">
+        {loginFields.map((field) => (
+          <Input
+            key={field.id}
+            handleChange={handleChange}
+            value={loginState[field.id] || ''}
+            labelText={field.labelText}
+            labelFor={field.labelFor}
+            id={field.id}
+            name={field.name}
+            type={field.type}
+            isRequired={field.isRequired}
+            placeholder={field.placeholder}
+          />
+        ))}
+      </div>
+      <FormExtra />
+      <FormAction text="Login" />
+    </form>
+  );
+};
+
+
+// App component
+const App = () => {
+  return (
+    <FormProvider>
+      <Routes>
+        <Route path="/reviews" />
+        <Route path="/" element={<Login />} />
+      </Routes>
+    </FormProvider>
+  );
+};
+
+export default App;
