@@ -8,8 +8,6 @@ import { Link } from "react-router-dom";
 
 
 export const ReservationsPage = () => {
-// State to store the listing data
-    const bookingUrl = process.env.REACT_APP_BOOKINGS_URL
     const location = useLocation()
 
     const {
@@ -19,10 +17,10 @@ export const ReservationsPage = () => {
         },
         id: listingId,
         name: listingName,
-        price,
+        pricePerNight,
         rating,
         image_1: image,
-
+        hostId
     } = location.state
 
     const getNumberOfNights = (checkInDate, checkOutDate) => {
@@ -45,6 +43,7 @@ export const ReservationsPage = () => {
     const createBooking = async () => {
         // Prepare the data to send. This is an example structure.
         const payload = {
+            hostId,
             guestId: 1, // pull from session, not dynamic yet
             listingId,
             startDate, 
@@ -52,14 +51,18 @@ export const ReservationsPage = () => {
             firstName: "Testing", // not dynamic yet
             lastName: "john", // not dynamic yet
             email: "dog@dog.com", // not dynamic yet
-            pricePerNight: price,
+            pricePerNight,
             name: listingName,
             duration: numNights
         };
 
+        console.log('payload:', payload)
+
         await axios.post(`${process.env.REACT_APP_PROCESS_BOOKING_URL}/payment`, payload)
         .then(response => {
             toast.success('Payment initiated successfully')
+            console.log('response:', response.data.checkout_url, response.data)
+            window.location.href = response.data.data.checkout_url
         })
         .catch(error => {
             toast.error('Error initiating payment:', error)
@@ -128,10 +131,10 @@ export const ReservationsPage = () => {
                                 {/* To be replaced with dynamic data, not dynamic yet */}
                                 <div className="flex justify-between">
                                     <div className="underline mt-2">
-                                        ${price} SGD x {numNights} nights
+                                        ${pricePerNight} SGD x {numNights} nights
                                     </div>
                                     <div>  
-                                        ${price * numNights} SGD
+                                        ${pricePerNight * numNights} SGD
                                     </div>
                                 </div>
                             </div>
@@ -142,7 +145,7 @@ export const ReservationsPage = () => {
                                     Total
                                 </div>
                                 <div>
-                                    ${price * numNights} SGD
+                                    ${pricePerNight * numNights} SGD
                                 </div>
                             </div>
                         </div>
