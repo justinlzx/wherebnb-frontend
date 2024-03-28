@@ -20,7 +20,7 @@ export const ReservationsPage = () => {
         pricePerNight,
         rating,
         image_1: image,
-
+        hostId
     } = location.state
 
     const getNumberOfNights = (checkInDate, checkOutDate) => {
@@ -43,6 +43,7 @@ export const ReservationsPage = () => {
     const createBooking = async () => {
         // Prepare the data to send. This is an example structure.
         const payload = {
+            hostId,
             guestId: 1, // pull from session, not dynamic yet
             listingId,
             startDate, 
@@ -55,11 +56,13 @@ export const ReservationsPage = () => {
             duration: numNights
         };
 
+        console.log('payload:', payload)
+
         await axios.post(`${process.env.REACT_APP_PROCESS_BOOKING_URL}/payment`, payload)
         .then(response => {
             toast.success('Payment initiated successfully')
             console.log('response:', response.data.checkout_url, response.data)
-            window.open(response.data.data.checkout_url, '_blank')
+            window.location.href = response.data.data.checkout_url
         })
         .catch(error => {
             toast.error('Error initiating payment:', error)

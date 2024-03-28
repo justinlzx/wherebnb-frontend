@@ -24,9 +24,7 @@ export const IndividualListingsPage = () => {
         setDates({ startDate: new Date(startDate), endDate: new Date(endDate) });
         }
     }
-
     
-    // TODO: use this useEffect when backend is ready 
     useEffect(() => {
         axios.get(`${accomsUrl}/accoms/${id}`)
         .then((resp) => {
@@ -38,7 +36,7 @@ export const IndividualListingsPage = () => {
         })
     }, [])
 
-
+    console.log('listing:', listing)
 
     return ( 
         <div className='mx-12'>

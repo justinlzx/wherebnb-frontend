@@ -1,12 +1,13 @@
 import { Link } from 'react-router-dom'
+import star from "../../assets/icons/star.png";
 
 export const InfoCard = ({ listing }) => {
 
   const {
       id,
       name,
-      description,
-      image,
+      image_1: image,
+      rating
   } = listing;
 
   return (
@@ -18,9 +19,11 @@ export const InfoCard = ({ listing }) => {
               />
           <div className="py-2 flex justify-between bg-transparent">
               <h3 className="text-xl font-semibold">{name}</h3>
+              <div className='flex'>
+                 <p className="text-md font-semibold mr-4">{rating.toFixed(2)}</p>  
+                <img src={star} alt="" className="h-5"/>
+              </div>
           </div>
-          <p className="mt-1 text-sm text-gray-500">{description}</p>
-          <p className="pb-2 text-sm text-gray-500">19-25 May</p>
         </div>
     </Link>
   );

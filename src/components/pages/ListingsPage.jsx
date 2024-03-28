@@ -17,17 +17,19 @@ export const ListingsPage = () => {
 
   const [listings, setListings] = useState()
 
-  // const getListings = useCallback( async () => {
-  //   await axios.get(`${process.env.REACT_APP_ACCOMS_URL}/accoms`)
-  //     .then((res) => {
-  //       console.log(res)
-  //       setListings(res.data)
-  //     })
-  // })
+  const getListings = useCallback(async () => {
+    await axios.get(`${process.env.REACT_APP_ACCOMS_URL}/accoms`)
+      .then((res) => {
+        setListings(res.data.data)
+      })
+      .catch((err) => {
+        console.log('err', err)
+      })
+  }, [])
 
-  // useEffect(() => {
-  //   getListings()
-  // }, [filters])
+  useEffect(() => {
+    getListings()
+  }, [filters, getListings])
 
   return (
     <div className="m-6">
@@ -77,7 +79,7 @@ export const ListingsPage = () => {
       </div>
 
       <div className="grid grid-cols-4 md:grid-cols-auto-cols-fr gap-8 md:gap-6 mt-4">
-        {listingsData.map((listing) => (
+        {listings?.map((listing) => (
           <InfoCard listing={listing} key={listing.id} />
         ))}
     </div>
