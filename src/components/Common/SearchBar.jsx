@@ -4,7 +4,7 @@ import "react-date-range/dist/styles.css"; // main style file
 import "react-date-range/dist/theme/default.css"; // theme css file
 import { DateRangePicker } from "react-date-range";
 
-// change to date range tailwind 
+// change to date range tailwind
 // import { DateRangePicker } from "react-tailwindcss-datepicker";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
