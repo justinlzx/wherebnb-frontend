@@ -42,7 +42,7 @@ export const SearchResultsPage = () => {
           Search
         </Button>
       </div>
-      <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} />
+      {/* <DateRangePicker ranges={[selectionRange]} onChange={handleSelect} /> */}
       <Cards listings={listingsData} />
     </div>
   );

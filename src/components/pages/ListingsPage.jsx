@@ -2,6 +2,7 @@ import { useCallback, useState, useEffect } from 'react';
 import listingsData from "../../listingsData";
 import { InfoCard } from "../Cards/InfoCard";
 import { countries } from '../../constants/countries';
+import { Filter } from '../Filter/Filter';
 import axios from 'axios';
 
 

@@ -32,7 +32,7 @@ export const App = () => {
    
       <ThemeProvider theme={ theme }>
         <Routes>
-        <Route path="" element={<Layout/>}>
+        <Route path="/" element={<Layout/>}>
           <Route index element={<ListingsPage/>}/>
           <Route path="/login" element={<LoginPage/>}/>
           <Route path="/signup" element={<SignUpPage/>}/>

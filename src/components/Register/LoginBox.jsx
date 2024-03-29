@@ -11,7 +11,6 @@ const FormContext = createContext();
 // Custom hook to use the form context
 const useFormContext = () => useContext(FormContext);
 
-// Provider component to manage the form data
 const FormProvider = ({ children }) => {
   const [loginState, setLoginState] = useState({});
   

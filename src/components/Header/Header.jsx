@@ -1,5 +1,6 @@
+import React, { useState, useRef } from 'react';
 import logo from "../../assets/logo/long-logo.png";
-import SearchBar from "./SearchBar";
+import { SearchBar } from "./SearchBar";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useClickAway } from "react-use";
@@ -10,7 +11,7 @@ export const Header = () => {
   const ref = useRef(null);
 
   const toggleExpanded = () => {
-    setIsExpanded((prevIsExpanded) => !isExpanded);
+    setIsExpanded((prevIsExpanded) => !prevIsExpanded);
   };
 
   useClickAway(ref, () => {
@@ -81,6 +82,7 @@ export const Header = () => {
   )
 
   return (
+    <>
       <header
         className="flex justify-between p-4 border-b bg-white z-40 w-full"
       >
@@ -138,15 +140,9 @@ export const Header = () => {
               </li>
             </ul>
           </div>
+        </header>
 
-          {/* <div className="avatar online placeholder">
-        <div className="bg-primary text-neutral-content rounded-full">
-          <span className="text-xl">AI</span>
-        </div>
-      </div> */}
-        </div>
-      </header>
-      <div className="fixed top-0 left-0 w-full h-full z-40">
+      <div className="top-0 left-0 w-full">
         <div className={modalClasses}></div>
       </div>
     </>
