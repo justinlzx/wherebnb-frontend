@@ -26,17 +26,17 @@ export const IndividualListingsPage = () => {
     }
     
     useEffect(() => {
-        axios.get(`${accomsUrl}/accoms/${id}`)
+        const source = axios.CancelToken.source();
+
+        axios.get(`${accomsUrl}/accoms/${id}`, { cancelToken: source.token })
         .then((resp) => {
             setListing(resp.data.data)
         })
-        axios.get(`${bookingsUrl}/booking/${id}`)
+        axios.get(`${bookingsUrl}/booking/${id}`, { cancelToken: source.token })
         .then((resp) => {
             setBookings(resp.data.data)
         })
     }, [])
-
-    console.log('listing:', listing)
 
     return ( 
         <div className='mx-12'>

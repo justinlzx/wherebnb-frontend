@@ -1,25 +1,10 @@
 import React, { useEffect } from "react";
 import "./App.css";
-import { Route, Routes } from 'react-router-dom'
-import { ListingsPage } from "./components/pages/ListingsPage";
-import { LoginPage } from "./components/pages/LoginPage";
-import { SignUpPage } from "./components/pages/SignUpPage";
-import { Layout } from "./components/Layout";
-import { Reviews } from "./components/pages/ReviewPage";
-import { SearchResultsPage } from "./components/pages/SearchResultsPage";
-import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { initializeApp } from "firebase/app";
+import { Outlet } from 'react-router-dom'
+import { Header } from './components/Header/Header'
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
-
-
-const theme = createTheme({
-  typography: {
-    fontFamily: [
-      'Nunito Sans',
-      'sans-serif',
-    ].join(','),
-  },
-}); 
 
 export const App = () => {
 
@@ -28,22 +13,14 @@ export const App = () => {
   }, []);
 
   return (
-    
-   
-      <ThemeProvider theme={ theme }>
-        <Routes>
-        <Route path="/" element={<Layout/>}>
-          <Route index element={<ListingsPage/>}/>
-          <Route path="/login" element={<LoginPage/>}/>
-          <Route path="/signup" element={<SignUpPage/>}/>
-          <Route path="/reviews" element={<Reviews/>}/>
-          <Route path="/results" element={<SearchResultsPage/>}/>
-        </Route>
-        </Routes>
-      </ThemeProvider>
-  
-    // <div className="p-5">
-    //   <h1 className="text-xl h1-2 w-12 border border-2 border-yellow-300 bg-slate-400">hello</h1>
-    // </div>
+    <div>
+      <div>
+        <Header />
+      </div>
+      <div>
+        <Outlet />
+      </div>
+      <ToastContainer />
+    </div>
   );
 }

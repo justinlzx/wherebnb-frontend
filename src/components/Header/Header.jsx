@@ -87,7 +87,7 @@ export const Header = () => {
         className="flex justify-between p-4 border-b bg-white z-40 w-full"
       >
           <div>
-            <Link to={"/listings"}>
+            <Link to={"/"}>
               <img src={logo} height={50} width={172} alt="" />
             </Link>
             
