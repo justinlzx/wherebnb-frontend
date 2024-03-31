@@ -20,7 +20,7 @@ export const InfoCard = ({ listing }) => {
           <div className="py-2 flex justify-between bg-transparent">
               <h3 className="text-xl font-semibold">{name}</h3>
               <div className='flex'>
-                 <p className="text-md font-semibold mr-4">{rating.toFixed(2)}</p>  
+                <p className="text-md font-semibold mr-4">{rating ? rating.toFixed(2) : 'N/A'}</p>
                 <img src={star} alt="" className="h-5"/>
               </div>
           </div>

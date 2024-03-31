@@ -25,19 +25,40 @@ export const IndividualListingsPage = () => {
         }
     }
     
+    // useEffect(() => {
+    //     const source = axios.CancelToken.source();
+    
+    //     axios.get(`${accomsUrl}/accoms/${id}`, { cancelToken: source.token })
+    //     .then((resp) => {
+    //         console.log(resp.data.data)
+    //         setListing(resp.data.data)
+    //     })
+    //     axios.get(`${bookingsUrl}/booking/${id}`, { cancelToken: source.token })
+    //     .then((resp) => {
+    //         setBookings(resp.data.data)
+    //     })
+    // }, [])
+
+    const [loading, setLoading] = useState(true);
+
     useEffect(() => {
         const source = axios.CancelToken.source();
-
+    
         axios.get(`${accomsUrl}/accoms/${id}`, { cancelToken: source.token })
         .then((resp) => {
-            setListing(resp.data.data)
+            const listing = resp.data.data.find(listing => listing.id === Number(id));
+            setListing(listing);
+            setLoading(false); // Set loading to false once the data is loaded
         })
         axios.get(`${bookingsUrl}/booking/${id}`, { cancelToken: source.token })
         .then((resp) => {
             setBookings(resp.data.data)
         })
     }, [])
-
+    
+    if (loading) {
+        return <div>Loading...</div>; // Display a loading message while the data is loading
+    }
     return ( 
         <div className='mx-12'>
             <div>

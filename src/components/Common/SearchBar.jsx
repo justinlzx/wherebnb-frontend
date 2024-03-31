@@ -1,15 +1,15 @@
 import React, { useState } from "react";
 import { Counter } from "../Counter/Counter";
-import "react-date-range/dist/styles.css"; // main style file
-import "react-date-range/dist/theme/default.css"; // theme css file
-import { DateRangePicker } from "react-date-range";
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css"; 
 
 // change to date range tailwind 
-// import { DateRangePicker } from "react-tailwindcss-datepicker";
+import { DateRange } from "react-date-range";
+import { DateRangePicker } from "react-tailwindcss-datepicker";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import { useSearchStore } from "../../store";
-//import { useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 
 const SearchBar = ({ toggleExpanded }) => {
   const [isSearchFocused, setIsSearchFocused] = useState(false);
@@ -69,7 +69,7 @@ const SearchBar = ({ toggleExpanded }) => {
           tabIndex={1}
           className="dropdown-content menu p-2 shadow bg-base-100 rounded-box w-52"
         >
-          <DateRangePicker
+          <DateRange
             ranges={[selectionRange]}
             minDate={new Date()}
             onChange={handleSelect}

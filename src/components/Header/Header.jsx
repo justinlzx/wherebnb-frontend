@@ -142,7 +142,7 @@ export const Header = () => {
           </div>
         </header>
 
-      <div className="top-0 left-0 w-full">
+      <div className="fixed top-0 left-0 w-full h-15">
         <div className={modalClasses}></div>
       </div>
     </>

@@ -16,7 +16,7 @@ export const routes = [
         children: [
             {
                 name: 'listings',
-                path: '',
+                path: '/listings',
                 element: <ListingsPage/>
             }, 
             {
