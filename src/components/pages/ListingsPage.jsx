@@ -16,7 +16,7 @@ export const ListingsPage = () => {
   });
 
   const getListings = useCallback(async () => {
-    await axios.get(`${accomsUrl}/accoms`)
+    await axios.get(`${accomsUrl}/listings`)
       .then((res) => {
         setListings(res.data.data);
         console.log(res.data.data)
