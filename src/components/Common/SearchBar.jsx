@@ -3,7 +3,7 @@ import { Counter } from "../Counter/Counter";
 import "react-date-range/dist/styles.css";
 import "react-date-range/dist/theme/default.css"; 
 
-// change to date range tailwind 
+// change to date range tailwind
 import { DateRange } from "react-date-range";
 import { DateRangePicker } from "react-tailwindcss-datepicker";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
