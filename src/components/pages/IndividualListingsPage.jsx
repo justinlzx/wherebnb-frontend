@@ -4,14 +4,20 @@ import axios from 'axios'
 import { useState } from 'react';
 import { DatePicker } from '../Common/DatePicker/DatePicker'
 import { Link } from 'react-router-dom'
+import { SubmitReview } from '../Reviews/SubmitReview'
+import { Comments } from '../Reviews/Comments'
+
+
 
 export const IndividualListingsPage = () => {
 
     const { id } = useParams()
     const accomsUrl = process.env.REACT_APP_ACCOMS_URL
     const bookingsUrl = process.env.REACT_APP_BOOKINGS_URL
+    const reviewsUrl = process.env.REACT_APP_REVIEWS_URL
     const [listing, setListing] = useState({})
     const [bookings, setBookings] = useState([])
+    // const [reviews, setReviews] = useState([])
 
     const [dates, setDates] = useState({
         startDate: null,
@@ -24,20 +30,6 @@ export const IndividualListingsPage = () => {
         setDates({ startDate: new Date(startDate), endDate: new Date(endDate) });
         }
     }
-    
-    // useEffect(() => {
-    //     const source = axios.CancelToken.source();
-    
-    //     axios.get(`${accomsUrl}/accoms/${id}`, { cancelToken: source.token })
-    //     .then((resp) => {
-    //         console.log(resp.data.data)
-    //         setListing(resp.data.data)
-    //     })
-    //     axios.get(`${bookingsUrl}/booking/${id}`, { cancelToken: source.token })
-    //     .then((resp) => {
-    //         setBookings(resp.data.data)
-    //     })
-    // }, [])
 
     const [loading, setLoading] = useState(true);
 
@@ -54,6 +46,10 @@ export const IndividualListingsPage = () => {
         .then((resp) => {
             setBookings(resp.data.data)
         })
+        // axios.get(`${reviewsUrl}/review/${id}`, { cancelToken: source.token })
+        // .then((resp) => {
+        // setReviews(resp.data.data);
+        // });
     }, [])
     
     if (loading) {
@@ -104,8 +100,11 @@ export const IndividualListingsPage = () => {
                             Book Now
                         </button>
                     </Link>
-                       
                 </div>
+            </div>
+            <div className="mx-auto items-center w-full m-2 p-2">
+            <SubmitReview id={id}/>
+            <Comments id={id}/>
             </div>
         </div>
     )

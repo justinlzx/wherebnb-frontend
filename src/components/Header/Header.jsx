@@ -5,7 +5,6 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useClickAway } from "react-use";
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { BackButton }  from "../Common/BackButton";
 export const Header = () => {
   const [isExpanded, setIsExpanded] = useState(false);
@@ -85,7 +84,7 @@ export const Header = () => {
   return (
     <>
       <header
-        className="flex justify-between p-4 border-b bg-white z-40 w-full"
+        className="flex justify-between p-4 border-b bg-white w-full"
       >
           <div className="flex justify-start">
             <BackButton sx={{ color:'primary' }}/>
