@@ -44,7 +44,7 @@ export const IndividualListingsPage = () => {
     useEffect(() => {
         const source = axios.CancelToken.source();
     
-        axios.get(`${accomsUrl}/accoms/${id}`, { cancelToken: source.token })
+        axios.get(`${accomsUrl}/listings/${id}`, { cancelToken: source.token })
         .then((resp) => {
             const listing = resp.data.data.find(listing => listing.id === Number(id));
             setListing(listing);
