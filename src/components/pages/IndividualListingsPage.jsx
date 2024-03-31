@@ -43,17 +43,24 @@ export const IndividualListingsPage = () => {
 
 
     // TODO: use this useEffect when backend is ready 
+    // useEffect(() => {
+    //     axios.get(`${accomsUrl}/accoms/${id}`)
+    //     .then((resp) => {
+    //         // console.log('data:', resp.data.data)
+    //         setListing(resp.data.data)
+    //     })
+       
+    // }, [])
+
     useEffect(() => {
         axios.get(`${accomsUrl}/accoms/${id}`)
         .then((resp) => {
-            // console.log('data:', resp.data.data)
-            setListing(resp.data.data)
+            // The data is an array, so we'll take the first element
+            setListing(resp.data.data[0])
         })
-       
     }, [])
 
     // TODO: connect to backend after left join to booking table is created 
-
     return ( 
         <div className='mx-12'>
             <div>

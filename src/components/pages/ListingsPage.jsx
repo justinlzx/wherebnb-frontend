@@ -8,6 +8,9 @@ import axios from 'axios';
 
 export const ListingsPage = () => {
 
+  const accomsUrl = process.env.REACT_APP_ACCOMS_URL
+  const bookingUrl = process.env.REACT_APP_BOOKINGS_URL
+
   const [filters, setFilters ] = useState({
     query: "",
     price: 0,
@@ -17,17 +20,17 @@ export const ListingsPage = () => {
 
   const [listings, setListings] = useState()
 
-  // const getListings = useCallback( async () => {
-  //   await axios.get(`${process.env.REACT_APP_ACCOMS_URL}/accoms`)
-  //     .then((res) => {
-  //       console.log(res)
-  //       setListings(res.data)
-  //     })
-  // })
+  const getListings = useCallback( async () => {
+    await axios.get(`${accomsUrl}/accoms`)
+      .then((res) => {
+        console.log(res)
+        setListings(res.data)
+      })
+  })
 
-  // useEffect(() => {
-  //   getListings()
-  // }, [filters])
+  useEffect(() => {
+    getListings()
+  }, [filters])
 
   return (
     <div className="m-6">
