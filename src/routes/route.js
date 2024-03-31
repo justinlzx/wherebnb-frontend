@@ -2,11 +2,11 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from '../App';
 import { ListingsPage } from '../components/pages/ListingsPage';
 import { LoginPage } from '../components/pages/LoginPage';
-import { Reviews } from '../components/pages/ReviewPage';
+// import { Reviews } from '../components/pages/ReviewPage';
 import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
 import { ReservationsPage } from '../components/pages/ReservationsPage';
 import { SignUpPage } from '../components/pages/SignUpPage';
-
+import { Reviews } from '../components/pages/Reviews';
 
 export const routes = [
     {
