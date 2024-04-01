@@ -69,7 +69,9 @@ export const DatePicker = ({
                 ? "bg-blue-400 text-white" // CSS class for selected dates
                 : "text-black" // CSS class for other dates
           }
-          tileDisabled={ tileContent }
+                    tileDisabled={({ date, view }) =>
+                    view === "month" && checkDates(date)
+                    }
         />
       </div>
       <div className="flex justify-end">
