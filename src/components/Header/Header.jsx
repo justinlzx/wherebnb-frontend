@@ -5,7 +5,6 @@ import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import clsx from "clsx";
 import { useClickAway } from "react-use";
 import { Link } from "react-router-dom";
-import { Link } from "react-router-dom";
 import { BackButton }  from "../Common/BackButton";
 export const Header = () => {
   const [isExpanded, setIsExpanded] = useState(false);
