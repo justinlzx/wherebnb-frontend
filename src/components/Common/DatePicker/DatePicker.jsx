@@ -28,6 +28,17 @@ export const DatePicker = ({
     }
   };
 
+  function tileContent({ date, view }) {
+    // Get today's date with the time cleared for accurate comparison
+    const today = new Date();
+    today.setHours(0, 0, 0, 0);
+    // Get the current date and time to check against the 3 PM rule
+    const now = new Date();
+    // Check if the tile date is today and the current time is past 3 PM
+    const isTodayAfter3PM = now.getHours() >= 15 && date.getDate() === now.getDate() && date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
+    // Check if the date is in the 'month' view, is a past date, or is today after 3 PM
+    return view === 'month' && (date < today || isTodayAfter3PM) ? <p>Booking not allowed</p> : null;
+  }
   const checkDates = (date) => {
     
     const dateToCheck = date.toISOString();
@@ -58,9 +69,7 @@ export const DatePicker = ({
                 ? "bg-blue-400 text-white" // CSS class for selected dates
                 : "text-black" // CSS class for other dates
           }
-          tileDisabled={({ date, view }) =>
-            view === "month" && checkDates(date)
-          }
+          tileDisabled={ tileContent }
         />
       </div>
       <div className="flex justify-end">
