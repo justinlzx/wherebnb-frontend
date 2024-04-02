@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 // Define the AUTH_KEY variable
-const AUTH_KEY="uIW1wNy1o566NkjQkPBLffQW5gyUiPGWf8f1jueQhAgFMijpeUMX97edbb5JUayUn1TCaN2Mg7Zp8r0jVmD32HwefVTETuIJmaniJR9fJs3z7WXVepoPmhXUNxR4ur7l";
+const AUTH_KEY=process.env.AUTH_KEY;
 
 // Create a custom instance of axios
 const customAxios = axios.create();

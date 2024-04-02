@@ -8,9 +8,9 @@ import {
   TextField,
   Rating,
 } from "@mui/material";
-import axios from "axios";
+import customAxios from "../../utils/customAxios";
 
-export const SubmitReview = ({ id }) => {
+export const SubmitReview = ({ id, hostId, listingId }) => {
   // userId = id 
   // console.log('Listing ID:', id);
   const reviewsUrl = process.env.REACT_APP_REVIEWS_URL;
@@ -18,71 +18,32 @@ export const SubmitReview = ({ id }) => {
   const accomsUrl = process.env.REACT_APP_ACCOMS_URL;
   const [reviewText, setReviewText] = useState("");
   const [rating, setRating] = useState(0);
-  const [hostId, setHostId] = useState(null); 
 
-
-  useEffect(() => {
-    // console.log('Listing ID:', id); 
-  
-    if (id) {
-      const source = axios.CancelToken.source();
-      axios
-        .get(`${accomsUrl}/listings/${id}`, { cancelToken: source.token })
-        .then((resp) => {
-          console.log('Response data:', resp.data);
-          if (resp.data.data && resp.data.data.length > 0) {
-            setHostId(resp.data.data[0].hostId);
-          } else {
-            console.error("No data in response or data array is empty");
-          }
-        })
-        .catch((error) => {
-          if (axios.isCancel(error)) {
-            console.log('Request canceled:', error.message);
-          } else {
-            console.error("Error fetching listing details:", error);
-          }
-        });
-  
-      return () => {
-        source.cancel('Operation canceled by the user.');
-      };
-    } else {
-      console.error("ID is undefined or not valid");
-    }
-  }, [id]);
-  
   const handleReviewSubmit = async () => {
     if (hostId === null) {
-      console.error("Host ID is not set. Cannot submit review.");
       return;
     }
 
     try {
-      const response1 = await axios.get(`${accountsUrl}/view/${id}`);
-      console.log(id)
-      console.log("Response from accounts service:", response1.data);
+      const response1 = await customAxios.get(`${accountsUrl}/view/${hostId}`);
       const guestName = `${response1.data.data.firstName} ${response1.data.data.lastName}`;
 
-      const response2 = await axios.get(`${accomsUrl}/listings/${id}`);
-      console.log("Response from accoms service:", response2.data);
+      const response2 = await customAxios.get(`${accomsUrl}/listings/${id}`);
       const propertyName = response2.data.name;
 
-      await axios.post(`${reviewsUrl}/review`, {
+      await customAxios.post(`${reviewsUrl}/review`, {
         review: reviewText,
-        listingId: id,
+        listingId,
         guestId: id,
-        guestName: guestName,
-        propertyName: propertyName,
-        rating: rating,
-        hostId: hostId,
+        guestName,
+        propertyName,
+        rating,
+        hostId,
       });
 
-      console.log("Review submitted successfully");
       setReviewText("");
       setRating(0);
     } catch (error) {
-      console.error("Error submitting review:", error);
       setReviewText("");
       setRating(0);
     }
@@ -102,7 +63,7 @@ export const SubmitReview = ({ id }) => {
           <Rating
             name="rating"
             value={rating}
-            onChange={(event, newValue) => {
+            onChange={(_, newValue) => {
               setRating(newValue);
             }}
           />

@@ -14,10 +14,8 @@ export const IndividualListingsPage = () => {
     const { id } = useParams()
     const accomsUrl = process.env.REACT_APP_ACCOMS_URL
     const bookingsUrl = process.env.REACT_APP_BOOKINGS_URL
-    const reviewsUrl = process.env.REACT_APP_REVIEWS_URL
     const [listing, setListing] = useState({})
     const [bookings, setBookings] = useState([])
-    // const [reviews, setReviews] = useState([])
 
     const [dates, setDates] = useState({
         startDate: null,
@@ -38,7 +36,6 @@ export const IndividualListingsPage = () => {
     
         axios.get(`${accomsUrl}/listings/${id}`, { cancelToken: source.token })
         .then((resp) => {
-            console.log(resp.data.data)
             const listing = resp.data.data;
             setListing(listing);
             setLoading(false); // Set loading to false once the data is loaded
@@ -47,10 +44,6 @@ export const IndividualListingsPage = () => {
         .then((resp) => {
             setBookings(resp.data.data)
         })
-        // axios.get(`${reviewsUrl}/review/${id}`, { cancelToken: source.token })
-        // .then((resp) => {
-        // setReviews(resp.data.data);
-        // });
     }, [])
     
     if (loading) {
@@ -104,7 +97,7 @@ export const IndividualListingsPage = () => {
                 </div>
             </div>
             <div className="mx-auto items-center w-full m-2 p-2">
-            <SubmitReview id={id}/>
+            <SubmitReview id={id} hostId={listing.hostId} listingId={listing.id}/>
             <Comments id={id}/>
             </div>
         </div>

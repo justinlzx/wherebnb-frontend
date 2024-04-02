@@ -10,9 +10,7 @@ export const CheckInPage = () => {
   const bookingsUrl = process.env.REACT_APP_BOOKINGS_URL;
   const checkinUrl = process.env.REACT_APP_CHECKIN_URL;
 
-  console.log(bookingsUrl, checkinUrl )
-
-  const [reservations, setReservation] = useState([]);
+  const [reservation, setReservation] = useState([]);
   const [bookings, setBookings] = useState([]);
   const [selectedBooking, setBooking] = useState({});
 
@@ -20,20 +18,19 @@ export const CheckInPage = () => {
 
   const [dates, setDates] = useState({})
 
-  const [userId, setUserId] = useState(-1); 
+  const [userId, setUserId] = useState(null); 
   const [loginState, setLoginState] = useState({}); 
  
   useEffect(() => { 
     const storedLoginState = localStorage.getItem('loginState'); 
-    console.log(storedLoginState)
     if (storedLoginState) { 
       const parsedLoginState = JSON.parse(storedLoginState); 
-      console.log(parsedLoginState) 
       setLoginState(parsedLoginState) 
-      console.log(loginState.userId) 
       setUserId(parsedLoginState.userId);
     } 
   }, []);
+
+  console.log(userId)
 
 
   const handleDates = (startDate, endDate) => {
@@ -42,38 +39,32 @@ export const CheckInPage = () => {
     } 
   }; 
 
-  const [loading, setLoading] = useState(true); 
-
   useEffect(() => {
     const source = axios.CancelToken.source();
 
-    axios.get(`${bookingsUrl}/bookings/${bookingId}`, { cancelToken: source.token })
-    .then((resp) => {
-      const booking = resp.data.data.find(booking => booking.id === Number(bookingId));
-      setBooking(booking); 
-      setLoading(false); 
-    })
-    axios.put(`${checkinUrl}/checkin/${bookingId}`)
-    .then((resp) => {
-      setCheckin(resp.data.data)
-    })
-
     const fetchReservations = async () => {
       try {
-        const response = await customAxios.get(`${bookingsUrl}/booking/${userId}`);
+        const response = await customAxios.get(`${bookingsUrl}/booking/${userId}`, source);
+        console.log(response.data);
         setReservation(response.data);
       } catch (error) {
         console.error("Error fetching reservations:", error);
       }
     };
 
-    fetchReservations();
-  }, [bookingsUrl]);
+    if (userId !== null) {
+      fetchReservations();
+    }
+
+    return () => {
+      source.cancel("Request canceled");
+    };
+  }, [bookingsUrl, userId]);
 
   const handleCheckIn = async (bookingId) => {
-    try {
       // Make a request to the backend endpoint to fetch booking details
       const response = await customAxios.get(`${bookingsUrl}/booking/${bookingId}`);
+
       const bookingData = response.data;
 
       // Extract required data from bookingData
@@ -84,17 +75,18 @@ export const CheckInPage = () => {
       console.log('Guest Name:', guestName);
       console.log('Booking ID:', bookingId);
       console.log('Host ID:', hostId);
+          // axios.put(`${checkinUrl}/checkin/${bookingId}`)
+    // .then((resp) => {
+    //   setCheckin(resp.data.data)
+    // })
+  }
 
-   
-    } catch (error) {
-      console.error("Error during check-in:", error);
-    }
-  };
+  console.log(reservation)
 
   return (
     <div className="px-16 m-8">
       <h1 className="text-2xl font-bold mb-4">Current Reservations</h1>
-      {reservations.map((reservation) => (
+      {reservation.length && reservation.map((reservation) => (
         <div
           key={reservation.id}
           className="flex justify-between items-center border-b pb-4 mb-4"
