@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import { formatDate } from "../../../utils/api";
 import "./DatePicker.css";
@@ -10,10 +10,12 @@ export const DatePicker = ({
 }) => {
   const [startDate, setStartDate] = useState(values.startDate);
   const [endDate, setEndDate] = useState(values.endDate);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleReset = () => {
     setStartDate(null);
     setEndDate(null);
+    setErrorMessage("");
   };
 
   const handleDates = (date) => {
@@ -29,18 +31,26 @@ export const DatePicker = ({
   };
 
   const checkDates = (date) => {
-    
     const dateToCheck = date.toISOString();
-    if (bookings) {return bookings.some(
-      (booking) =>
-        dateToCheck >= booking.startDate && dateToCheck <= booking.endDate
-    );}
-    return;
+    if (bookings) {
+      return bookings.some(
+        (booking) =>
+          dateToCheck >= booking.startDate && dateToCheck <= booking.endDate
+      );
+    }
+    return false;
   };
 
   useEffect(() => {
     onChange(startDate, endDate);
-  }, [startDate, endDate])
+    // Check if there is a disabled date between selected dates
+    const hasDisabledDateBetween = bookings && startDate && endDate && bookings.some(booking => booking.startDate < endDate && booking.endDate > startDate);
+    if (hasDisabledDateBetween) {
+      setErrorMessage("Please select dates without disabled dates in between.");
+    } else {
+      setErrorMessage("");
+    }
+  }, [startDate, endDate]);
 
   return (
     <>
@@ -55,14 +65,17 @@ export const DatePicker = ({
               : startDate &&
                 date <= (endDate ?? startDate) &&
                 date >= startDate
-                ? "bg-blue-400 text-white" // CSS class for selected dates
-                : "text-black" // CSS class for other dates
+              ? "bg-blue-400 text-white" // CSS class for selected dates
+              : "text-black" // CSS class for other dates
           }
           tileDisabled={({ date, view }) =>
             view === "month" && checkDates(date)
           }
         />
       </div>
+      {errorMessage && (
+        <div className="text-red-500 text-sm">{errorMessage}</div>
+      )}
       <div className="flex justify-end">
         <button
           onClick={handleReset}

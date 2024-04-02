@@ -2,12 +2,13 @@ import { createBrowserRouter } from 'react-router-dom';
 import { App } from '../App';
 import { ListingsPage } from '../components/pages/ListingsPage';
 import { LoginPage } from '../components/pages/LoginPage';
-// import { Reviews } from '../components/pages/ReviewPage';
 import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
 import { ReservationsPage } from '../components/pages/ReservationsPage';
 import { SignUpPage } from '../components/pages/SignUpPage';
 import { Reviews } from '../components/pages/Reviews';
 import { MyBookingsPage } from '../components/pages/MyBookings';
+import { Review } from '../components/Reviews/Review';
+import { CheckInPage } from '../components/pages/CheckInPage';
 
 export const routes = [
     {
@@ -17,7 +18,7 @@ export const routes = [
         children: [
             {
                 name: 'listings',
-                path: '/listings',
+                path: '/',
                 element: <ListingsPage/>
             }, 
             {
@@ -37,8 +38,8 @@ export const routes = [
             }, 
             {
                 name: 'Reviews',
-                path: 'reviews',
-                element: <Reviews/>
+                path: 'listings/review/:id',
+                element: <Review/>
             }, 
             {
                 name: 'signup',
@@ -50,6 +51,10 @@ export const routes = [
                 path: 'mybookings',
                 element: <MyBookingsPage/>
             },
+                name: 'check-in',
+                path: '/check-in',
+                element: <CheckInPage/>
+            }
         ]
     }
 ]

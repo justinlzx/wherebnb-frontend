@@ -2,8 +2,22 @@
 @tailwind components;
 @tailwind utilities;
 
+:root {
+  --primary-color: #002b69; /* Define primary color */
+  --secondary-color: #717171; /* Define secondary color */
+}
+
+body {
+  margin: 0;
+  font-family: "Nunito Sans", sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
 .App {
-  text-align: center;
+  /* Apply theme colors */
+  --main-background-color: #f7f7f7; /* Define main background color */
+  --text-color: #000; /* Define text color */
 }
 
 .App-logo {
