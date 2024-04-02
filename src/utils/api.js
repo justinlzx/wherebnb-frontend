@@ -7,3 +7,4 @@ export const formatDate = (timeString) => {
   };
   return date.toLocaleDateString("en-GB", options);
 };
+

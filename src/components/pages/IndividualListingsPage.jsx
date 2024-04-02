@@ -1,6 +1,6 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import axios from 'axios'
+import axios from "axios";
 import { useState } from 'react';
 import { DatePicker } from '../Common/DatePicker/DatePicker'
 import { Link } from 'react-router-dom'
@@ -56,7 +56,7 @@ export const IndividualListingsPage = () => {
         return <div>Loading...</div>; // Display a loading message while the data is loading
     }
     return ( 
-        <div className='mx-12'>
+        <div className='mx-20 px-16 m-8'>
             <div>
                 <h1 className='text-4xl font-bold my-2'>{listing.name}</h1>
             </div>

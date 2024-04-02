@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
 import Calendar from "react-calendar";
 import { formatDate } from "../../../utils/api";
 import "./DatePicker.css";
@@ -10,10 +10,12 @@ export const DatePicker = ({
 }) => {
   const [startDate, setStartDate] = useState(values.startDate);
   const [endDate, setEndDate] = useState(values.endDate);
+  const [errorMessage, setErrorMessage] = useState("");
 
   const handleReset = () => {
     setStartDate(null);
     setEndDate(null);
+    setErrorMessage("");
   };
 
   const handleDates = (date) => {
@@ -28,30 +30,27 @@ export const DatePicker = ({
     }
   };
 
-  function tileContent({ date, view }) {
-    // Get today's date with the time cleared for accurate comparison
-    const today = new Date();
-    today.setHours(0, 0, 0, 0);
-    // Get the current date and time to check against the 3 PM rule
-    const now = new Date();
-    // Check if the tile date is today and the current time is past 3 PM
-    const isTodayAfter3PM = now.getHours() >= 15 && date.getDate() === now.getDate() && date.getMonth() === now.getMonth() && date.getFullYear() === now.getFullYear();
-    // Check if the date is in the 'month' view, is a past date, or is today after 3 PM
-    return view === 'month' && (date < today || isTodayAfter3PM) ? <p>Booking not allowed</p> : null;
-  }
   const checkDates = (date) => {
-    
     const dateToCheck = date.toISOString();
-    if (bookings) {return bookings.some(
-      (booking) =>
-        dateToCheck >= booking.startDate && dateToCheck <= booking.endDate
-    );}
-    return;
+    if (bookings) {
+      return bookings.some(
+        (booking) =>
+          dateToCheck >= booking.startDate && dateToCheck <= booking.endDate
+      );
+    }
+    return false;
   };
 
   useEffect(() => {
     onChange(startDate, endDate);
-  }, [startDate, endDate])
+    // Check if there is a disabled date between selected dates
+    const hasDisabledDateBetween = bookings && startDate && endDate && bookings.some(booking => booking.startDate < endDate && booking.endDate > startDate);
+    if (hasDisabledDateBetween) {
+      setErrorMessage("Please select dates without disabled dates in between.");
+    } else {
+      setErrorMessage("");
+    }
+  }, [startDate, endDate]);
 
   return (
     <>
@@ -66,14 +65,17 @@ export const DatePicker = ({
               : startDate &&
                 date <= (endDate ?? startDate) &&
                 date >= startDate
-                ? "bg-blue-400 text-white" // CSS class for selected dates
-                : "text-black" // CSS class for other dates
+              ? "bg-blue-400 text-white" // CSS class for selected dates
+              : "text-black" // CSS class for other dates
           }
-                    tileDisabled={({ date, view }) =>
-                    view === "month" && checkDates(date)
-                    }
+          tileDisabled={({ date, view }) =>
+            view === "month" && checkDates(date)
+          }
         />
       </div>
+      {errorMessage && (
+        <div className="text-red-500 text-sm">{errorMessage}</div>
+      )}
       <div className="flex justify-end">
         <button
           onClick={handleReset}

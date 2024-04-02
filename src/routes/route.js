@@ -6,7 +6,7 @@ import { IndividualListingsPage } from '../components/pages/IndividualListingsPa
 import { ReservationsPage } from '../components/pages/ReservationsPage';
 import { SignUpPage } from '../components/pages/SignUpPage';
 import { Review } from '../components/Reviews/Review';
-
+import { CheckInPage } from '../components/pages/CheckInPage';
 
 export const routes = [
     {
@@ -44,6 +44,11 @@ export const routes = [
                 path: 'signup',
                 element: <SignUpPage/>
             },
+            {
+                name: 'check-in',
+                path: '/check-in',
+                element: <CheckInPage/>
+            }
         ]
     }
 ]

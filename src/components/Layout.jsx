@@ -4,12 +4,10 @@ import { Footer } from "./Common/Footer";
 
 export const Layout = () => {
   return (
-    <>
+    <div className="flex flex-col h-screen justify-between">
       <Header />
-      <div className="z-1 relative top-[10rem] p-5 container mx-auto">
-        <Outlet className="p-8" />
-      </div>
-      <Footer/>
-    </>
+      <Outlet className="mb-auto" />
+      <Footer />
+    </div>
   );
 };
