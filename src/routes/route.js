@@ -5,16 +5,18 @@ import { LoginPage } from '../components/pages/LoginPage';
 import { IndividualListingsPage } from '../components/pages/IndividualListingsPage';
 import { ReservationsPage } from '../components/pages/ReservationsPage';
 import { SignUpPage } from '../components/pages/SignUpPage';
-import { Reviews } from '../components/pages/Reviews';
 import { MyBookingsPage } from '../components/pages/MyBookings';
 import { Review } from '../components/Reviews/Review';
 import { CheckInPage } from '../components/pages/CheckInPage';
+import { FormProvider } from '../components/Register/LoginBox.jsx';
 
 export const routes = [
     {
         name: 'home',
         path: '/',
-        element: <App />,
+        element: <FormProvider>
+            <App />
+        </FormProvider>,
         children: [
             {
                 name: 'listings',
@@ -51,6 +53,7 @@ export const routes = [
                 path: 'mybookings',
                 element: <MyBookingsPage/>
             },
+            {
                 name: 'check-in',
                 path: '/check-in',
                 element: <CheckInPage/>

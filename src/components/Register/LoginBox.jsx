@@ -11,7 +11,7 @@ const FormContext = createContext();
 // Custom hook to use the form context
 const useFormContext = () => useContext(FormContext);
 
-const FormProvider = ({ children }) => {
+export const FormProvider = ({ children }) => {
   const [loginState, setLoginState] = useState({});
   
   useEffect(() => {
@@ -35,7 +35,7 @@ const FormProvider = ({ children }) => {
 };
 
 // Login component
-const Login = () => {
+export const Login = () => {
   const { loginState, updateFormData } = useFormContext();
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ const Login = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     // Redirect to another page upon successful login
-    navigate('/reviews');
+    navigate('/');
   };
 
   return (
@@ -74,18 +74,3 @@ const Login = () => {
     </form>
   );
 };
-
-
-// App component
-const App = () => {
-  return (
-    <FormProvider>
-      <Routes>
-        <Route path="/reviews" />
-        <Route path="/" element={<Login />} />
-      </Routes>
-    </FormProvider>
-  );
-};
-
-export default App;

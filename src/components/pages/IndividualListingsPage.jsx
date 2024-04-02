@@ -38,7 +38,8 @@ export const IndividualListingsPage = () => {
     
         axios.get(`${accomsUrl}/listings/${id}`, { cancelToken: source.token })
         .then((resp) => {
-            const listing = resp.data.data.find(listing => listing.id === Number(id));
+            console.log(resp.data.data)
+            const listing = resp.data.data;
             setListing(listing);
             setLoading(false); // Set loading to false once the data is loaded
         })

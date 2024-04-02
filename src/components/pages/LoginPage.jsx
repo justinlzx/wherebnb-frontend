@@ -1,5 +1,5 @@
 import HeaderPrompt from "../Register/RegisterHeader";
-import Login from "../Register/LoginBox";
+import { Login } from "../Register/LoginBox";
 import { SignUpPage } from "./SignUpPage";
 
 export const LoginPage = ({heading, paragraph, linkName, linkUrl={SignUpPage}}) => {
