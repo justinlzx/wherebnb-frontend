@@ -14,7 +14,6 @@ const useFormContext = () => useContext(FormContext);
 const FormProvider = ({ children }) => {
   const [loginState, setLoginState] = useState({});
   
-  // Load stored data when component mounts
   useEffect(() => {
     const storedData = JSON.parse(localStorage.getItem('loginState'));
     if (storedData) {
@@ -22,12 +21,12 @@ const FormProvider = ({ children }) => {
     }
   }, []);
 
-  // Function to update form data
   const updateFormData = (data) => {
-    setLoginState(data);
-    localStorage.setItem('loginState', JSON.stringify(data));
+    const updatedData = { ...data, userId: 1 };                        // Append userId = 1
+    setLoginState(updatedData);                                       // Set loginState to contain the updated data
+    localStorage.setItem('loginState', JSON.stringify(updatedData)); // Store updated loginState in localStorage
   };
-
+  
   return (
     <FormContext.Provider value={{ loginState, updateFormData }}>
       {children}
@@ -38,12 +37,12 @@ const FormProvider = ({ children }) => {
 // Login component
 const Login = () => {
   const { loginState, updateFormData } = useFormContext();
-  const navigate = useNavigate(); // Initialize useNavigate
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
-    const { id, value } = e.target;
-    const updatedState = { ...loginState, [id]: value };
-    updateFormData(updatedState);
+    const { id, value } = e.target;                                // 1. Collects data from form input
+    const updatedState = { ...loginState, [id]: value };          // 2. Maps field id (e.g. email-address) from formFields.js to input value
+    updateFormData(updatedState);                                // 3. Calls updateFormData with the above hashmap as parameter
   };
 
   const handleSubmit = (e) => {
