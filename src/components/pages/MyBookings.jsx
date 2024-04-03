@@ -12,23 +12,20 @@ const bookingsData = [
 ];
 
 export const MyBookingsPage = () => {
-    const [bookings, setBookings] = useState(bookingsData);   // Delete later
+    const [bookings, setBookings] = useState([]);   // Delete later
     const navigate = useNavigate();   // Initialize useNavigate
 
-    const handleReviewClick = (bookingId) => {
+    const handleReviewClick = () => {
         navigate('/reviews');
     };
 
     // Change here if not hardcoding, update var bookings to store data
     const bookingsUrl = process.env.REACT_APP_BOOKINGS_URL;   // Add Review msvc url if not hardcoding
-    console.log(process.env);
-    const [listings, setListings] = useState([]);   // Rename listings to bookings if not hardcoding
 
     const getBookings = useCallback(async () => {   // Function to retrieve user bookings if not hardcoding
       await axios.get(`${bookingsUrl}/listings`)    // Update to call Add Review msvc if not hardcoding
         .then((res) => {
-          setListings(res.data.data);
-          console.log(res.data.data);
+          setBookings(res.data.data);
         })
         .catch((err) => {
           console.log('err', err);
@@ -37,7 +34,7 @@ export const MyBookingsPage = () => {
 
     useEffect(() => {
       getBookings();
-    });
+    }, [getBookings]);
 
     return (
         <div style={{ textAlign: 'center', maxWidth: '95%', margin: '0 auto' }}>

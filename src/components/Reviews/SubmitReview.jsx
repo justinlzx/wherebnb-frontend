@@ -9,6 +9,7 @@ import {
   Rating,
 } from "@mui/material";
 import customAxios from "../../utils/customAxios";
+import { toast } from "react-toastify";
 
 export const SubmitReview = ({ id, hostId, listingId }) => {
   // userId = id 
@@ -41,9 +42,11 @@ export const SubmitReview = ({ id, hostId, listingId }) => {
         hostId,
       });
 
+      toast.success("Review submitted successfully!");
       setReviewText("");
       setRating(0);
     } catch (error) {
+      toast.error("Failed to submit review. Please try again.");
       setReviewText("");
       setRating(0);
     }

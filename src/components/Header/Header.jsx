@@ -107,7 +107,6 @@ export const Header = () => {
             <div tabIndex={0} className="z-[1] card card-compact dropdown-content w-52 bg-base-100 shadow">
               <div className="card-body">
                 <span className="font-bold text-lg">My Trips</span>
-                <span className="text-info">Text here</span>
                 <div className="card-actions">
                   <Link to="/check-in" className="btn btn-primary btn-block">View Bookings</Link>
                 </div>

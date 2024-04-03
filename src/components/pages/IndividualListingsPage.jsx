@@ -7,8 +7,6 @@ import { Link } from 'react-router-dom'
 import { SubmitReview } from '../Reviews/SubmitReview'
 import { Comments } from '../Reviews/Comments'
 
-
-
 export const IndividualListingsPage = () => {
 
     const { id } = useParams()

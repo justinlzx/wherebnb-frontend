@@ -29,9 +29,7 @@ export function Footer() {
         `}
       </style>
       <div className="text-white grid grid-cols-1 justify-between gap-4 md:grid-cols-2">
-        <Typography variant="h5" className="mb-6">
-          wherebnb
-        </Typography>
+        <div></div>
         <div className="text-white grid grid-cols-3 justify-between gap-4">
           {LINKS.map(({ title, items }) => (
             <ul key={title}>
