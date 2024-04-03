@@ -108,7 +108,7 @@ export const Header = () => {
               <div className="card-body">
                 <span className="font-bold text-lg">My Trips</span>
                 <div className="card-actions">
-                  <Link to="/check-in" className="btn btn-primary btn-block">View Bookings</Link>
+                  <Link to="/check-in" className="btn text-white bg-primary btn-block">View Bookings</Link>
                 </div>
               </div>
             </div>

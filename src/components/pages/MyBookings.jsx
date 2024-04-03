@@ -2,7 +2,7 @@ import React, { useCallback, useState, useEffect } from 'react';
 import logo from "../../assets/logo/long-logo.png";
 import HeaderPrompt from "../Register/RegisterHeader";
 import { BrowserRouter as Router, Routes, Route, Link, useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import customAxios from '../../utils/customAxios';
 
 
 // Change data here if hardcoding
@@ -23,7 +23,7 @@ export const MyBookingsPage = () => {
     const bookingsUrl = process.env.REACT_APP_BOOKINGS_URL;   // Add Review msvc url if not hardcoding
 
     const getBookings = useCallback(async () => {   // Function to retrieve user bookings if not hardcoding
-      await axios.get(`${bookingsUrl}/listings`)    // Update to call Add Review msvc if not hardcoding
+      await customAxios.get(`${bookingsUrl}/listings`)    // Update to call Add Review msvc if not hardcoding
         .then((res) => {
           setBookings(res.data.data);
         })

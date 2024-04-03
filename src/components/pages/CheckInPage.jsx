@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import customAxios from "../../utils/customAxios";
 import { toast } from "react-toastify";
 import { CheckInRow } from '../CheckIn/CheckInRow';
-import axios from "axios";
+import axios from "axios"; 
 
 export const CheckInPage = () => {
 

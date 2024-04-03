@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
 import { Typography, Rating, Grid } from "@mui/material";
-import axios from "axios";
+import customAxios from "../../utils/customAxios";
 
 export const Comments = () => {
   const { id } = useParams();
@@ -10,8 +10,8 @@ export const Comments = () => {
   const [averageRating, setAverageRating] = useState(0);
 
   useEffect(() => {
-    const source = axios.CancelToken.source(); 
-    axios.get(`${reviewsUrl}/review/${id}`, { cancelToken: source.token })
+    const source = customAxios.CancelToken.source(); 
+    customAxios.get(`${reviewsUrl}/review/${id}`, { cancelToken: source.token })
       .then((resp) => {
         setComments(resp.data);
         console.log(resp.data);

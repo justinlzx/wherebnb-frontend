@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from "react";
 import { InfoCard } from "../Cards/InfoCard";
 import { countries } from "../../constants/countries";
 import { Filter } from "../Filter/Filter";
-import axios from "axios";
+import customAxios from "../../utils/customAxios";
 
 export const ListingsPage = () => {
   const accomsUrl = process.env.REACT_APP_ACCOMS_URL;
@@ -15,7 +15,7 @@ export const ListingsPage = () => {
   });
 
   const getListings = useCallback(async () => {
-    await axios
+    await customAxios
       .get(`${accomsUrl}/listings`, {
         params: filters,
       })
@@ -39,7 +39,7 @@ export const ListingsPage = () => {
     <>
       <div className="px-8 m-8">
       <div className="grid grid-cols-12 gap-4">
-        <div className="col-span-3 "> {/* Adjusted width */}
+        <div className="col-span-3 "> 
           <Filter updateFilters={updateFilters}/>
         </div>
         <div className="col-span-9">

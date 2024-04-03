@@ -16,6 +16,7 @@ export const InfoCard = ({ listing }) => {
         <img
               src={image}
               className="w-68 h-70 rounded-lg object-cover transition-transform duration-300 hover:scale-100"
+              style={{ maxHeight:"200px" }}
               />
           <div className="py-2 flex justify-between bg-transparent">
               <h3 className="text-xl font-semibold">{name}</h3>

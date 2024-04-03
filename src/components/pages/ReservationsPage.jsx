@@ -1,10 +1,10 @@
-import axios from "axios";
+import { useLocation, Link } from "react-router-dom";
+import { toast } from "react-toastify";
+import customAxios from "../../utils/customAxios";
 import left from "../../assets/icons/left.png";
 import star from "../../assets/icons/star.png";
-import { toast } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
-import { useLocation } from "react-router-dom";
-import { Link } from "react-router-dom";
+
 
 
 export const ReservationsPage = () => {
@@ -58,7 +58,7 @@ export const ReservationsPage = () => {
 
         console.log('payload:', payload)
 
-        await axios.post(`${process.env.REACT_APP_PROCESS_BOOKING_URL}/payment`, payload)
+        await customAxios.post(`${process.env.REACT_APP_PROCESS_BOOKING_URL}/payment`, payload)
         .then(response => {
             toast.success('Payment initiated successfully')
             console.log('response:', response.data.checkout_url, response.data)

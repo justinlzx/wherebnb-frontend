@@ -1,11 +1,11 @@
 import { useParams } from 'react-router-dom';
 import { useEffect } from 'react';
-import axios from "axios";
 import { useState } from 'react';
 import { DatePicker } from '../Common/DatePicker/DatePicker'
 import { Link } from 'react-router-dom'
 import { SubmitReview } from '../Reviews/SubmitReview'
 import { Comments } from '../Reviews/Comments'
+import customAxios from '../../utils/customAxios';
 
 export const IndividualListingsPage = () => {
 
@@ -30,15 +30,15 @@ export const IndividualListingsPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const source = axios.CancelToken.source();
+        const source = customAxios.CancelToken.source();
     
-        axios.get(`${accomsUrl}/listings/${id}`, { cancelToken: source.token })
+        customAxios.get(`${accomsUrl}/listings/${id}`, { cancelToken: source.token })
         .then((resp) => {
             const listing = resp.data.data;
             setListing(listing);
             setLoading(false); // Set loading to false once the data is loaded
         })
-        axios.get(`${bookingsUrl}/booking/${id}`, { cancelToken: source.token })
+        customAxios.get(`${bookingsUrl}/booking/${id}`, { cancelToken: source.token })
         .then((resp) => {
             setBookings(resp.data.data)
         })

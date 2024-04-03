@@ -19,7 +19,7 @@ import {
   Select,
 } from "@mui/material";
 import { countries } from "../../constants/countries";
-import axios from "axios";
+
 
 export const Filter = ({ updateFilters }) => {
   const [filters, setFilters] = useState({
