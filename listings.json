@@ -1,0 +1,67 @@
+[
+    {
+        "name": "Adventure Cove",
+        "hostId": 1,
+        "propertyType": "Cove",
+        "country": "USA",
+        "description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries,",
+        "address": "123 Ocean Avenue, Santa Monica, CA, 90401",
+        "image_1": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/aaron-huber-oMOx_wV6mLQ-unsplash.jpg?alt=media&token=a522692a-4a84-40a9-acfa-d6fdd396dc60",
+        "image_2": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/andrea-davis-lIvqoCl6h-A-unsplash.jpg?alt=media&token=d217692f-25f1-4757-8d76-ba17d520d245",
+        "image_3":"https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/harley-davidson-56R8TzG7Lzc-unsplash.jpg?alt=media&token=2ca40110-3670-4423-b4eb-e2d8650a8982",
+        "image_4": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/inera-isovic-Y6lwa7g0MGk-unsplash.jpg?alt=media&token=5ef1aaf8-59e2-4b93-8c85-41e6ee5603e6",
+        "image_5":"https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/karsten-winegeart-sStahKEhT9w-unsplash.jpg?alt=media&token=16a84a6f-c3da-4847-9174-cea005612cec"
+    },
+    {
+        "name": "Serenity Bay Retreat",
+        "hostId": 2,
+        "propertyType": "Beach House",
+        "country": "USA",
+        "description": "Escape to a tranquil beach retreat with stunning ocean views. This cozy beach house offers the perfect getaway for couples or small families. Enjoy long walks on the sandy shores and breathtaking sunsets.",
+        "address": "456 Beachfront Road, Malibu, CA, 90265",
+        "image_1": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/andrea-davis-lIvqoCl6h-A-unsplash.jpg?alt=media&token=d217692f-25f1-4757-8d76-ba17d520d245",
+        "image_2": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/aaron-huber-oMOx_wV6mLQ-unsplash.jpg?alt=media&token=a522692a-4a84-40a9-acfa-d6fdd396dc60",
+        "image_3": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/inera-isovic-Y6lwa7g0MGk-unsplash.jpg?alt=media&token=5ef1aaf8-59e2-4b93-8c85-41e6ee5603e6",
+        "image_4": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/harley-davidson-56R8TzG7Lzc-unsplash.jpg?alt=media&token=2ca40110-3670-4423-b4eb-e2d8650a8982",
+        "image_5": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/karsten-winegeart-sStahKEhT9w-unsplash.jpg?alt=media&token=16a84a6f-c3da-4847-9174-cea005612cec"
+    },
+    {
+        "name": "Mountain Vista Lodge",
+        "hostId": 3,
+        "propertyType": "Mountain Cabin",
+        "country": "USA",
+        "description": "Embrace the majestic beauty of the mountains at this cozy cabin retreat. Nestled amidst towering pines, this lodge offers stunning views, hiking trails, and the perfect ambiance for a relaxing getaway.",
+        "address": "789 Summit Trail, Aspen, CO, 81611",
+        "image_1": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/harley-davidson-56R8TzG7Lzc-unsplash.jpg?alt=media&token=2ca40110-3670-4423-b4eb-e2d8650a8982",
+        "image_2": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/inera-isovic-Y6lwa7g0MGk-unsplash.jpg?alt=media&token=5ef1aaf8-59e2-4b93-8c85-41e6ee5603e6",
+        "image_3": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/karsten-winegeart-sStahKEhT9w-unsplash.jpg?alt=media&token=16a84a6f-c3da-4847-9174-cea005612cec",
+        "image_4": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/aaron-huber-oMOx_wV6mLQ-unsplash.jpg?alt=media&token=a522692a-4a84-40a9-acfa-d6fdd396dc60",
+        "image_5": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/andrea-davis-lIvqoCl6h-A-unsplash.jpg?alt=media&token=d217692f-25f1-4757-8d76-ba17d520d245"
+    },
+    {
+        "name": "Riverside Retreat",
+        "hostId": 4,
+        "propertyType": "Riverside Cabin",
+        "country": "USA",
+        "description": "Unwind in nature's embrace at this charming riverside cabin. Situated along the tranquil riverbanks, this retreat offers the perfect blend of serenity and adventure. Enjoy fishing, kayaking, or simply basking in the peaceful ambiance.",
+        "address": "101 Riverbank Lane, Boulder, CO, 80301",
+        "image_1": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/inera-isovic-Y6lwa7g0MGk-unsplash.jpg?alt=media&token=5ef1aaf8-59e2-4b93-8c85-41e6ee5603e6",
+        "image_2": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/karsten-winegeart-sStahKEhT9w-unsplash.jpg?alt=media&token=16a84a6f-c3da-4847-9174-cea005612cec",
+        "image_3": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/aaron-huber-oMOx_wV6mLQ-unsplash.jpg?alt=media&token=a522692a-4a84-40a9-acfa-d6fdd396dc60",
+        "image_4": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/andrea-davis-lIvqoCl6h-A-unsplash.jpg?alt=media&token=d217692f-25f1-4757-8d76-ba17d520d245",
+        "image_5": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/harley-davidson-56R8TzG7Lzc-unsplash.jpg?alt=media&token=2ca40110-3670-4423-b4eb-e2d8650a8982"
+    },
+    {
+        "name": "Tranquil Lakeview Cabin",
+        "hostId": 5,
+        "propertyType": "Lakefront Cabin",
+        "country": "USA",
+        "description": "Experience the ultimate lakeside getaway at this charming cabin retreat. Surrounded by pristine nature and breathtaking lake views, this tranquil haven offers the perfect escape from the hustle and bustle of city life.",
+        "address": "321 Lakeview Drive, Tahoe City, CA, 96145",
+        "image_1": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/karsten-winegeart-sStahKEhT9w-unsplash.jpg?alt=media&token=16a84a6f-c3da-4847-9174-cea005612cec",
+        "image_2": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/aaron-huber-oMOx_wV6mLQ-unsplash.jpg?alt=media&token=a522692a-4a84-40a9-acfa-d6fdd396dc60",
+        "image_3": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/inera-isovic-Y6lwa7g0MGk-unsplash.jpg?alt=media&token=5ef1aaf8-59e2-4b93-8c85-41e6ee5603e6",
+        "image_4": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/andrea-davis-lIvqoCl6h-A-unsplash.jpg?alt=media&token=d217692f-25f1-4757-8d76-ba17d520d245",
+        "image_5": "https://firebasestorage.googleapis.com/v0/b/wherebnb-a0baa.appspot.com/o/harley-davidson-56R8TzG7Lzc-unsplash.jpg?alt=media&token=2ca40110-3670-4423-b4eb-e2d8650a8982"
+    }
+]
