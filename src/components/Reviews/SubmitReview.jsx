@@ -30,7 +30,7 @@ export const SubmitReview = ({ id, hostId, listingId }) => {
       const guestName = `${response1.data.data.firstName} ${response1.data.data.lastName}`;
 
       const response2 = await customAxios.get(`${accomsUrl}/listings/${id}`);
-      const propertyName = response2.data.name;
+      const propertyName = response2.data.data.name;
 
       await customAxios.post(`${reviewsUrl}/review`, {
         review: reviewText,
