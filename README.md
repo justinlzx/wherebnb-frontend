@@ -1,18 +1,39 @@
-# Getting Started with Create React App
+# wherebnb-frontend
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+wherebnb is a React-based web application that allows users to search for accommodations based on various criteria such as location (country), price range, number of rooms, etc. Users can explore available listings, view details of each accommodation, and book their desired stay. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
 
-## Available Scripts
+## Setting up 
+1. Clone the repository
+   
+2. Install dependencies 
+```sh
+  npm install
+```
+3. Create an `.env` file in the root directory
+```sh
+REACT_APP_FRONTEND_URL=http://localhost:8000
+REACT_APP_ACCOMS_URL=http://localhost:8000/accoms
+REACT_APP_BOOKINGS_URL=http://localhost:8000/bookings
+REACT_APP_ACCOUNTS_URL=http://localhost:8000/accounts
+REACT_APP_PROCESS_BOOKING_URL=http://localhost:8000/process-booking
+REACT_APP_PAYMENTS_URL=http://localhost:8000/payment
+REACT_APP_NOTIFICATIONS_URL=http://localhost:8000/rabbit
+REACT_APP_REVIEWS_URL=http://localhost:8000/reviews
+REACT_APP_CHECKIN_URL=http://localhost:8000/check-in
+``` 
 
-In the project directory, you can run:
-
-### `npm start`
+## Running the application
+```sh
+  npm start
+```
 
 Runs the app in the development mode.\
 Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+## Default ReactJS read.me 
 
 ### `npm test`
 
