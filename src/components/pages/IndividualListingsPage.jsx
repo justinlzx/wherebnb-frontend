@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom'
 import { SubmitReview } from '../Reviews/SubmitReview'
 import { Comments } from '../Reviews/Comments'
 import customAxios from '../../utils/customAxios';
+import axios from 'axios';
 
 export const IndividualListingsPage = () => {
 
@@ -30,7 +31,7 @@ export const IndividualListingsPage = () => {
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
-        const source = customAxios.CancelToken.source();
+        const source = axios.CancelToken.source();
     
         customAxios.get(`${accomsUrl}/listings/${id}`, { cancelToken: source.token })
         .then((resp) => {

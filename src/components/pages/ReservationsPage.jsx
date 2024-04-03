@@ -4,8 +4,7 @@ import customAxios from "../../utils/customAxios";
 import left from "../../assets/icons/left.png";
 import star from "../../assets/icons/star.png";
 import 'react-toastify/dist/ReactToastify.css';
-
-
+import { useState, useEffect } from "react";
 
 export const ReservationsPage = () => {
     const location = useLocation()
@@ -22,6 +21,16 @@ export const ReservationsPage = () => {
         image_1: image,
         hostId
     } = location.state
+
+    const [loginState, setLoginState] = useState({}); 
+
+    useEffect(() => { 
+        const storedLoginState = localStorage.getItem('loginState'); 
+        if (storedLoginState) { 
+        const parsedLoginState = JSON.parse(storedLoginState); 
+        setLoginState(parsedLoginState) 
+        } 
+    }, []);
 
     const getNumberOfNights = (checkInDate, checkOutDate) => {
         const oneDay = 1000 * 60 * 60 * 24; // milliseconds in a day
@@ -41,27 +50,26 @@ export const ReservationsPage = () => {
     const numNights = getNumberOfNights(startDate, endDate)
 
     const createBooking = async () => {
-        // Prepare the data to send. This is an example structure.
+
+        const hostInfo = await customAxios.get(`${process.env.REACT_APP_ACCOUNTS_URL}/view/${loginState.userId}`)
+
         const payload = {
             hostId,
-            guestId: 1, // pull from session, not dynamic yet
+            guestId: loginState.userId,
             listingId,
             startDate, 
             endDate, 
-            firstName: "Testing", // not dynamic yet
-            lastName: "john", // not dynamic yet
-            email: "dog@dog.com", // not dynamic yet
+            firstName: hostInfo.data.data.firstName,
+            lastName: hostInfo.data.data.lastName,
+            email: hostInfo.data.data.email,
             pricePerNight,
             name: listingName,
             duration: numNights
         };
 
-        console.log('payload:', payload)
-
         await customAxios.post(`${process.env.REACT_APP_PROCESS_BOOKING_URL}/payment`, payload)
         .then(response => {
             toast.success('Payment initiated successfully')
-            console.log('response:', response.data.checkout_url, response.data)
             window.location.href = response.data.data.checkout_url
         })
         .catch(error => {
