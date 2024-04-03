@@ -1,6 +1,6 @@
 # wherebnb-frontend
 
-wherebnb is a React-based web application that allows users to search for accommodations based on various criteria such as location (country), price range, number of rooms, etc. Users can explore available listings, view details of each accommodation, and book their desired stay. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
+wherebnb-frontend React-based web application that allows users to search for accommodations based on various criteria such as location (country), price range, number of rooms, etc. Users can explore available listings, view details of each accommodation, and book their desired stay. This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). 
 
 ## Setting up 
 1. Clone the repository
@@ -32,6 +32,9 @@ Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 The page will reload when you make changes.\
 You may also see any lint errors in the console.
+
+## UI Libraries used. 
+In the wherebnb-frontend, we utilize Material UI for React components, Tailwind CSS for utility-first styling, and Daisy UI, a Tailwind CSS component library, to streamline UI development.
 
 ### Default ReactJS read.me (For Reference) 
 
