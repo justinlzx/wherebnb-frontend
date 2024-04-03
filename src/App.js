@@ -25,11 +25,15 @@ export const App = () => {
   }, []);
 
   return (
-    <ThemeProvider theme={theme}>
-      <Header /> {/* Header component */}
-      <Outlet /> {/* Router outlet */}
-      <Footer /> {/* Footer component */}
-      <ToastContainer /> 
-    </ThemeProvider>
+  <ThemeProvider theme={theme}>
+    <div className="App"> {/* Apply the 'App' class here */}
+      <div className="flex flex-col h-screen justify-between">
+        <Header />
+        <Outlet />
+        <ToastContainer />
+        <Footer/>
+      </div>
+    </div>
+  </ThemeProvider>
   );
 };

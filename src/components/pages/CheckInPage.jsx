@@ -89,7 +89,7 @@ export const CheckInPage = () => {
   }
 
   return (
-    <div className="px-16 m-8">
+    <div className="px-16">
       <h1 className="text-2xl font-bold mb-4">Current Reservations</h1>
       {reservation.map((reservation) => (
         <CheckInRow reservation={reservation} instructions={checkinInstructions} handleCheckIn={handleCheckIn} key={reservation.id}/>

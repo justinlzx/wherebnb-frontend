@@ -24,15 +24,16 @@ export const App = () => {
 
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <div className="App"> {/* Apply the 'App' class here */}
+    <ThemeProvider theme={theme}>
+      <div className="App"> {/* Apply the 'App' class here */}
+        <div className="flex flex-col h-screen justify-between">
           <Header />
-          <div className="container mx-auto w-80">
-            <Outlet />
-          </div>
+          <Outlet />
           <ToastContainer />
+          <Footer/>
         </div>
-      </ThemeProvider>
+      </div>
+    </ThemeProvider>
     </>
   );
 };

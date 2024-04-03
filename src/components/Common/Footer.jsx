@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { Typography } from "@material-tailwind/react";
-import logo from "../../assets/logo/long-logo.png";
+import logo from "../../assets/logo/logo.png";
 import { Outlet, useLocation } from "react-router-dom";
 
 const LINKS = [
@@ -28,7 +28,7 @@ export const Footer = () => {
         <div className="grid grid-cols-1 justify-between gap-4 md:grid-cols-1">
           <div className="grid grid-cols-4 justify-between gap-4">
             <div className="flex justify-center md:justify-start md:grid-cols-2">
-              <img src={logo} className="h-12" alt="Logo"></img>
+              <img src={logo} className="h-20" alt="Logo"></img>
             </div>
             {LINKS.map(({ title, items }) => (
               <ul key={title}>
